@@ -1,0 +1,546 @@
+ARM Linker, RVCT3.1 [Build 934] for uVision [Standard]
+
+================================================================================
+
+Section Cross References
+
+    lpc_api.o(.text) refers to lpc_api.o(.data) for .data
+    lpc_api.o(.text) refers to lpc_api.o(.bss) for .bss
+    lpc_arm922t_cp15_driver.o(.text) refers to lpc_arm922t_cp15_driver.o(.data) for virtual_tlb_addr
+    lpc_bmp.o(.text) refers to lpc_heap.o(.text) for lpc_new
+    lpc_fat16.o(.text) refers to lpc_heap.o(.text) for lpc_new
+    lpc_fat16.o(.text) refers to lpc_fat16_private.o(.text) for fat16_moveto
+    lpc_fat16.o(.text) refers to aeabi_sdiv.o(.text_udiv) for __aeabi_uidivmod
+    lpc_heap.o(.text) refers to lpc_heap.o(.data) for heap_base
+    lpc_helvr10.o(.constdata) refers to lpc_helvr10.o(.data) for helvr10_bits
+    lpc_lbecc.o(.text) refers to lpc_lbecc.o(.bss) for .bss
+    lpc_line_parser.o(.text) refers to lpc_line_parser.o(.data) for .data
+    lpc_line_parser.o(.text) refers to lpc_line_parser.o(.bss) for .bss
+    lpc_rom8x8.o(.constdata) refers to lpc_rom8x8.o(.data) for rom8x8_bits
+    lpc_rom8x16.o(.constdata) refers to lpc_rom8x16.o(.data) for rom8x16_bits
+    lpc_string.o(.text) refers to aeabi_sdiv.o(.text_udiv) for __aeabi_uidivmod
+    lpc_swim.o(.text) refers to aeabi_sdiv.o(.text) for __aeabi_idivmod
+    lpc_swim.o(.text) refers to lpc_helvr10.o(.constdata) for font_helvr10
+    lpc_swim_font.o(.text) refers to lpc_swim.o(.text) for swim_put_box
+    lpc_swim_image.o(.text) refers to aeabi_sdiv.o(.text) for __aeabi_idivmod
+    lpc_winfreesystem14x16.o(.constdata) refers to lpc_winfreesystem14x16.o(.data) for winfreesystem14x16_bits
+    lpc_x5x7.o(.constdata) refers to lpc_x5x7.o(.data) for x5x7_bits
+    lpc_x6x13.o(.constdata) refers to lpc_x6x13.o(.data) for x6x13_bits
+    lpc3xxx_spwm_driver.o(.text) refers to aeabi_sdiv.o(.text_udiv) for __aeabi_uidivmod
+    lpc3xxx_spwm_driver.o(.text) refers to lpc3xxx_spwm_driver.o(.bss) for .bss
+    lpc32xx_adc_driver.o(.text) refers to lpc32xx_adc_driver.o(.bss) for .bss
+    lpc32xx_clcdc_driver.o(.text) refers to lpc32xx_clkpwr_driver.o(.text) for clkpwr_get_clock_rate
+    lpc32xx_clcdc_driver.o(.text) refers to aeabi_sdiv.o(.text_udiv) for __aeabi_uidivmod
+    lpc32xx_clcdc_driver.o(.text) refers to lpc32xx_clcdc_driver.o(.bss) for .bss
+    lpc32xx_clcdc_driver.o(.text) refers to lpc32xx_clcdc_driver.o(.constdata) for .constdata
+    lpc32xx_clkpwr_driver.o(.text) refers to lludiv5.o(.text) for __aeabi_uldivmod
+    lpc32xx_clkpwr_driver.o(.text) refers to lpc32xx_clkpwr_driver.o(.data) for .data
+    lpc32xx_clkpwr_driver.o(.text) refers to aeabi_sdiv.o(.text_udiv) for __aeabi_uidivmod
+    lpc32xx_dma_driver.o(.text) refers to lpc32xx_clkpwr_driver.o(.text) for clkpwr_clk_en_dis
+    lpc32xx_dma_driver.o(.text) refers to lpc32xx_intc_driver.o(.text) for int_install_irq_handler
+    lpc32xx_dma_driver.o(.text) refers to lpc_arm922t_cp15_driver.o(.text) for cp15_map_virtual_to_physical
+    lpc32xx_dma_driver.o(.text) refers to lpc32xx_dma_driver.o(.bss) for .bss
+    lpc32xx_hstimer_driver.o(.text) refers to lpc32xx_clkpwr_driver.o(.text) for clkpwr_get_clock_rate
+    lpc32xx_hstimer_driver.o(.text) refers to lludiv5.o(.text) for __aeabi_uldivmod
+    lpc32xx_hstimer_driver.o(.text) refers to lpc32xx_hstimer_driver.o(.data) for .data
+    lpc32xx_hsuart_driver.o(.text) refers to lpc32xx_clkpwr_driver.o(.text) for clkpwr_get_base_clock_rate
+    lpc32xx_hsuart_driver.o(.text) refers to aeabi_sdiv.o(.text_udiv) for __aeabi_uidivmod
+    lpc32xx_hsuart_driver.o(.text) refers to lpc32xx_intc_driver.o(.text) for int_install_irq_handler
+    lpc32xx_hsuart_driver.o(.text) refers to lpc32xx_hsuart_driver.o(.bss) for .bss
+    lpc32xx_i2c_driver.o(.text) refers to lpc32xx_intc_driver.o(.text) for int_enable
+    lpc32xx_i2c_driver.o(.text) refers to lpc32xx_clkpwr_driver.o(.text) for clkpwr_get_base_clock_rate
+    lpc32xx_i2c_driver.o(.text) refers to aeabi_sdiv.o(.text_udiv) for __aeabi_uidivmod
+    lpc32xx_i2c_driver.o(.text) refers to lpc32xx_i2c_driver.o(.bss) for header
+    lpc32xx_i2c_driver.o(.text) refers to lpc32xx_i2c_driver.o(.data) for .data
+    lpc32xx_i2s_driver.o(.text) refers to lpc32xx_gpio_driver.o(.text) for i2s_pin_mux
+    lpc32xx_i2s_driver.o(.text) refers to lpc32xx_clkpwr_driver.o(.text) for clkpwr_clk_en_dis
+    lpc32xx_i2s_driver.o(.text) refers to lpc32xx_intc_driver.o(.text) for int_disable
+    lpc32xx_i2s_driver.o(.text) refers to lpc32xx_i2s_driver.o(.bss) for .bss
+    lpc32xx_intc_driver.o(.text) refers to lpc_arm922t_cp15_driver.o(.text) for cp15_get_mmu_control_reg
+    lpc32xx_intc_driver.o(.text) refers to lpc32xx_intc_driver.o(.data) for vecarea
+    lpc32xx_intc_driver.o(.text) refers to lpc32xx_vectors.o(.text) for lpc32xx_reset_vector
+    lpc32xx_intc_driver.o(.text) refers to lpc32xx_intc_driver.o(.bss) for irq_func_ptrs
+    lpc32xx_kscan_driver.o(.text) refers to lpc32xx_clkpwr_driver.o(.text) for clkpwr_clk_en_dis
+    lpc32xx_kscan_driver.o(.text) refers to lpc32xx_kscan_driver.o(.data) for .data
+    lpc32xx_mlcnand_driver.o(.text) refers to lpc32xx_dma_driver.o(.text) for dma_get_base
+    lpc32xx_mlcnand_driver.o(.text) refers to lpc32xx_clkpwr_driver.o(.text) for clkpwr_setup_nand_ctrlr
+    lpc32xx_mlcnand_driver.o(.text) refers to lpc32xx_mlcnand_driver.o(.data) for .data
+    lpc32xx_mlcnand_driver.o(.text) refers to lpc32xx_mlcnand_driver.o(.bss) for .bss
+    lpc32xx_mlcnand_driver.o(.text) refers to lpc32xx_intc_driver.o(.text) for int_install_irq_handler
+    lpc32xx_mstimer_driver.o(.text) refers to aeabi_sdiv.o(.text_udiv) for __aeabi_uidivmod
+    lpc32xx_mstimer_driver.o(.text) refers to lpc32xx_mstimer_driver.o(.data) for .data
+    lpc32xx_pwm_driver.o(.text) refers to aeabi_sdiv.o(.text_udiv) for __aeabi_uidivmod
+    lpc32xx_pwm_driver.o(.text) refers to lpc32xx_pwm_driver.o(.bss) for .bss
+    lpc32xx_rtc_driver.o(.text) refers to lpc32xx_rtc_driver.o(.data) for .data
+    lpc32xx_sdcard_driver.o(.text) refers to lpc32xx_dma_driver.o(.text) for dma_alloc_channel
+    lpc32xx_sdcard_driver.o(.text) refers to lpc32xx_intc_driver.o(.text) for int_enable
+    lpc32xx_sdcard_driver.o(.text) refers to rt_memcpy_w.o(.text) for __aeabi_memcpy4
+    lpc32xx_sdcard_driver.o(.text) refers to lpc32xx_clkpwr_driver.o(.text) for clkpwr_setup_mcard_ctrlr
+    lpc32xx_sdcard_driver.o(.text) refers to aeabi_sdiv.o(.text_udiv) for __aeabi_uidivmod
+    lpc32xx_sdcard_driver.o(.text) refers to lpc32xx_sdcard_driver.o(.bss) for .bss
+    lpc32xx_slcnand_driver.o(.text) refers to lpc32xx_dma_driver.o(.text) for dma_get_base
+    lpc32xx_slcnand_driver.o(.text) refers to lpc32xx_slcnand_driver.o(.data) for .data
+    lpc32xx_slcnand_driver.o(.text) refers to lpc32xx_slcnand_driver.o(.bss) for .bss
+    lpc32xx_slcnand_driver.o(.text) refers to lpc32xx_clkpwr_driver.o(.text) for clkpwr_setup_nand_ctrlr
+    lpc32xx_slcnand_driver.o(.text) refers to lpc32xx_intc_driver.o(.text) for int_install_irq_handler
+    lpc32xx_spi_driver.o(.text) refers to lpc32xx_clkpwr_driver.o(.text) for clkpwr_get_clock_rate
+    lpc32xx_spi_driver.o(.text) refers to aeabi_sdiv.o(.text_udiv) for __aeabi_uidivmod
+    lpc32xx_spi_driver.o(.text) refers to lpc32xx_spi_driver.o(.constdata) for .constdata
+    lpc32xx_spi_driver.o(.text) refers to lpc32xx_spi_driver.o(.bss) for .bss
+    lpc32xx_ssp_driver.o(.text) refers to lpc32xx_clkpwr_driver.o(.text) for clkpwr_get_clock_rate
+    lpc32xx_ssp_driver.o(.text) refers to aeabi_sdiv.o(.text_udiv) for __aeabi_uidivmod
+    lpc32xx_ssp_driver.o(.text) refers to lpc32xx_ssp_driver.o(.constdata) for .constdata
+    lpc32xx_ssp_driver.o(.text) refers to lpc32xx_ssp_driver.o(.bss) for .bss
+    lpc32xx_timer_driver.o(.text) refers to lpc32xx_clkpwr_driver.o(.text) for clkpwr_get_clock_rate
+    lpc32xx_timer_driver.o(.text) refers to lludiv5.o(.text) for __aeabi_uldivmod
+    lpc32xx_timer_driver.o(.text) refers to lpc32xx_timer_driver.o(.bss) for .bss
+    lpc32xx_timer_driver.o(.text) refers to lpc32xx_timer_driver.o(.constdata) for .constdata
+    lpc32xx_tsc_driver.o(.text) refers to lpc32xx_intc_driver.o(.text) for int_disable
+    lpc32xx_tsc_driver.o(.text) refers to lpc32xx_tsc_driver.o(.bss) for .bss
+    lpc32xx_uart_driver.o(.text) refers to lpc32xx_clkpwr_driver.o(.text) for clkpwr_get_base_clock_rate
+    lpc32xx_uart_driver.o(.text) refers to aeabi_sdiv.o(.text_udiv) for __aeabi_uidivmod
+    lpc32xx_uart_driver.o(.text) refers to lpc32xx_intc_driver.o(.text) for int_install_irq_handler
+    lpc32xx_uart_driver.o(.text) refers to lpc32xx_uart_driver.o(.bss) for .bss
+    lpc32xx_uart_driver.o(.text) refers to lpc32xx_uart_driver.o(.constdata) for .constdata
+    lpc32xx_wdt_driver.o(.text) refers to lpc32xx_wdt_driver.o(.data) for .data
+    lpc32xx_vectors.o(.text) refers to lpc32xx_intc_driver.o(.bss) for irq_func_ptrs
+    phy3250_board.o(.text) refers to lpc32xx_ssp_driver.o(.text) for ssp_open
+    phy3250_board.o(.text) refers to lpc32xx_clkpwr_driver.o(.text) for clkpwr_get_base_clock_rate
+    phy3250_board.o(.text) refers to aeabi_sdiv.o(.text_udiv) for __aeabi_uidivmod
+    phy3250_board.o(.text) refers to lpc32xx_gpio_driver.o(.text) for gpio_set_gpo_state
+    phy3250_board.o(.text) refers to phy3250_board.o(.data) for .data
+    phy3250_nand.o(.text) refers to rt_memcpy_w.o(.text) for __aeabi_memcpy4
+    phy3250_nand.o(.text) refers to lpc32xx_clkpwr_driver.o(.text) for clkpwr_get_clock_rate
+    phy3250_nand.o(.text) refers to aeabi_sdiv.o(.text_udiv) for __aeabi_uidivmod
+    phy3250_nand.o(.text) refers to aeabi_sdiv.o(.text) for __aeabi_idivmod
+    phy3250_nand.o(.text) refers to lpc32xx_gpio_driver.o(.text) for gpio_set_gpo_state
+    phy3250_nand.o(.text) refers to phy3250_nand.o(.data) for islargeblock
+    phy3250_nand.o(.text) refers to phy3250_nand.o(.bss) for .bss
+    phy3250_kickstrt.o(.text) refers to lpc32xx_gpio_driver.o(.text) for gpio_set_gpo_state
+    phy3250_kickstrt.o(.text) refers to phy3250_nand.o(.text) for nand_init
+    phy3250_kickstart.o(STARTUP) refers to phy3250_kickstrt.o(.text) for c_entry
+    aeabi_sdiv.o(.text_udiv) refers to aeabi_sdiv.o(.text) for __arm_div4
+    aeabi_sdiv_div0.o(.text_udiv) refers to aeabi_sdiv_div0.o(.text) for __arm_div4
+    aeabi_idiv0_sigfpe.o(.text) refers to rt_div0.o(.text) for __rt_div0
+    aeabi_ldiv0_sigfpe.o(.text) refers to rt_div0.o(.text) for __rt_div0
+    rt_div0.o(.text) refers to defsig_fpe_outer.o(.text) for __rt_SIGFPE
+    defsig_fpe_outer.o(.text) refers to defsig_fpe_inner.o(.text) for __rt_SIGFPE_inner
+    defsig_fpe_outer.o(.text) refers to defsig_exit.o(.text) for __sig_exit
+    defsig_fpe_formal.o(.text) refers to rt_raise.o(.text) for __rt_raise
+    defsig_fpe_formal.o(.text) refers (Special) to defsig_fpe_inner.o(.text) for __rt_SIGFPE_inner
+    rt_raise.o(.text) refers to __raise.o(.text) for __raise
+    rt_raise.o(.text) refers to sys_exit.o(.text) for _sys_exit
+    defsig_exit.o(.text) refers to sys_exit.o(.text) for _sys_exit
+    defsig_fpe_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    sys_exit.o(.text) refers to use_no_semi.o(.text) for __I_use_semihosting
+    __raise.o(.text) refers to defsig.o(CL$$defsig) for __default_signal_handler
+    defsig_general.o(.text) refers to sys_wrch.o(.text) for _ttywrch
+    sys_wrch.o(.text) refers (Special) to use_no_semi.o(.text) for __I_use_semihosting
+    defsig.o(CL$$defsig) refers (Weak) to defsig_fpe_inner.o(.text) for __rt_SIGFPE_inner
+
+
+================================================================================
+
+Removing Unused input sections from the image.
+
+    Removing lpc_api.o(.text), (1152 bytes).
+    Removing lpc_api.o(.data), (4 bytes).
+    Removing lpc_api.o(.bss), (720 bytes).
+    Removing lpc_arm922t_cp15_driver.o(.text), (1584 bytes).
+    Removing lpc_arm922t_cp15_driver.o(.data), (4 bytes).
+    Removing lpc_bmp.o(.text), (1252 bytes).
+    Removing lpc_colors.o(.text), (4 bytes).
+    Removing lpc_fat16.o(.text), (4484 bytes).
+    Removing lpc_fat16_private.o(.text), (1296 bytes).
+    Removing lpc_heap.o(.text), (1008 bytes).
+    Removing lpc_heap.o(.data), (8 bytes).
+    Removing lpc_helvr10.o(.data), (2375 bytes).
+    Removing lpc_helvr10.o(.constdata), (12 bytes).
+    Removing lpc_lbecc.o(.text), (1512 bytes).
+    Removing lpc_lbecc.o(.bss), (1792 bytes).
+    Removing lpc_lcd_params.o(.constdata), (468 bytes).
+    Removing lpc_line_parser.o(.text), (572 bytes).
+    Removing lpc_line_parser.o(.data), (16 bytes).
+    Removing lpc_line_parser.o(.bss), (320 bytes).
+    Removing lpc_nandflash_params.o(.constdata), (6 bytes).
+    Removing lpc_rom8x8.o(.data), (4608 bytes).
+    Removing lpc_rom8x8.o(.constdata), (12 bytes).
+    Removing lpc_rom8x16.o(.data), (8704 bytes).
+    Removing lpc_rom8x16.o(.constdata), (12 bytes).
+    Removing lpc_string.o(.text), (1080 bytes).
+    Removing lpc_swim.o(.text), (2824 bytes).
+    Removing lpc_swim_font.o(.text), (1792 bytes).
+    Removing lpc_swim_image.o(.text), (1560 bytes).
+    Removing lpc_winfreesystem14x16.o(.data), (7392 bytes).
+    Removing lpc_winfreesystem14x16.o(.constdata), (12 bytes).
+    Removing lpc_x5x7.o(.data), (1905 bytes).
+    Removing lpc_x5x7.o(.constdata), (12 bytes).
+    Removing lpc_x6x13.o(.data), (3429 bytes).
+    Removing lpc_x6x13.o(.constdata), (12 bytes).
+    Removing lpc3xxx_spwm_driver.o(.text), (1384 bytes).
+    Removing lpc3xxx_spwm_driver.o(.bss), (24 bytes).
+    Removing lpc32xx_adc_driver.o(.text), (492 bytes).
+    Removing lpc32xx_adc_driver.o(.bss), (24 bytes).
+    Removing lpc32xx_clcdc_driver.o(.text), (2320 bytes).
+    Removing lpc32xx_clcdc_driver.o(.constdata), (16 bytes).
+    Removing lpc32xx_clcdc_driver.o(.bss), (12 bytes).
+    Removing lpc32xx_dma_driver.o(.text), (1132 bytes).
+    Removing lpc32xx_dma_driver.o(.bss), (76 bytes).
+    Removing lpc32xx_hstimer_driver.o(.text), (1604 bytes).
+    Removing lpc32xx_hstimer_driver.o(.data), (8 bytes).
+    Removing lpc32xx_hsuart_driver.o(.text), (2080 bytes).
+    Removing lpc32xx_hsuart_driver.o(.bss), (96 bytes).
+    Removing lpc32xx_i2c_driver.o(.text), (3860 bytes).
+    Removing lpc32xx_i2c_driver.o(.data), (4 bytes).
+    Removing lpc32xx_i2c_driver.o(.bss), (52 bytes).
+    Removing lpc32xx_i2s_driver.o(.text), (2832 bytes).
+    Removing lpc32xx_i2s_driver.o(.bss), (560 bytes).
+    Removing lpc32xx_intc_driver.o(.text), (1800 bytes).
+    Removing lpc32xx_intc_driver.o(.data), (4 bytes).
+    Removing lpc32xx_intc_driver.o(.bss), (384 bytes).
+    Removing lpc32xx_kscan_driver.o(.text), (1000 bytes).
+    Removing lpc32xx_kscan_driver.o(.data), (8 bytes).
+    Removing lpc32xx_mlcnand_driver.o(.text), (7440 bytes).
+    Removing lpc32xx_mlcnand_driver.o(.data), (16 bytes).
+    Removing lpc32xx_mlcnand_driver.o(.bss), (12 bytes).
+    Removing lpc32xx_mstimer_driver.o(.text), (1424 bytes).
+    Removing lpc32xx_mstimer_driver.o(.data), (8 bytes).
+    Removing lpc32xx_pwm_driver.o(.text), (3828 bytes).
+    Removing lpc32xx_pwm_driver.o(.bss), (24 bytes).
+    Removing lpc32xx_rtc_driver.o(.text), (1052 bytes).
+    Removing lpc32xx_rtc_driver.o(.data), (8 bytes).
+    Removing lpc32xx_sdcard_driver.o(.text), (5272 bytes).
+    Removing lpc32xx_sdcard_driver.o(.bss), (104 bytes).
+    Removing lpc32xx_slcnand_driver.o(.text), (10656 bytes).
+    Removing lpc32xx_slcnand_driver.o(.data), (20 bytes).
+    Removing lpc32xx_slcnand_driver.o(.bss), (12 bytes).
+    Removing lpc32xx_spi_driver.o(.text), (2052 bytes).
+    Removing lpc32xx_spi_driver.o(.constdata), (2 bytes).
+    Removing lpc32xx_spi_driver.o(.bss), (48 bytes).
+    Removing lpc32xx_ssp_driver.o(.text), (1748 bytes).
+    Removing lpc32xx_ssp_driver.o(.constdata), (2 bytes).
+    Removing lpc32xx_ssp_driver.o(.bss), (48 bytes).
+    Removing lpc32xx_timer_driver.o(.text), (2256 bytes).
+    Removing lpc32xx_timer_driver.o(.constdata), (4 bytes).
+    Removing lpc32xx_timer_driver.o(.bss), (32 bytes).
+    Removing lpc32xx_tsc_driver.o(.text), (1308 bytes).
+    Removing lpc32xx_tsc_driver.o(.bss), (80 bytes).
+    Removing lpc32xx_uart_driver.o(.text), (2664 bytes).
+    Removing lpc32xx_uart_driver.o(.constdata), (4 bytes).
+    Removing lpc32xx_uart_driver.o(.bss), (144 bytes).
+    Removing lpc32xx_wdt_driver.o(.text), (1380 bytes).
+    Removing lpc32xx_wdt_driver.o(.data), (8 bytes).
+    Removing lpc32xx_vectors.o(.text), (216 bytes).
+    Removing phy3250_board.o(.text), (1336 bytes).
+    Removing phy3250_board.o(.data), (260 bytes).
+    Removing phy3250_board.o(.bss), (40 bytes).
+
+91 unused section(s) (total 115223 bytes) removed from the image.
+
+================================================================================
+
+Image Symbol Table
+
+    Local Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    ../../angel/rt.s                         0x00000000   Number         0  aeabi_idiv0.o ABSOLUTE
+    ../../angel/rt.s                         0x00000000   Number         0  rt_div0.o ABSOLUTE
+    ../../angel/rt.s                         0x00000000   Number         0  aeabi_ldiv0_sigfpe.o ABSOLUTE
+    ../../angel/rt.s                         0x00000000   Number         0  aeabi_ldiv0.o ABSOLUTE
+    ../../angel/rt.s                         0x00000000   Number         0  rt_raise.o ABSOLUTE
+    ../../angel/rt.s                         0x00000000   Number         0  aeabi_idiv0_sigfpe.o ABSOLUTE
+    ../../angel/sys.s                        0x00000000   Number         0  use_no_semi.o ABSOLUTE
+    ../../angel/sys.s                        0x00000000   Number         0  sys_exit.o ABSOLUTE
+    ../../angel/sysapp.c                     0x00000000   Number         0  sys_wrch.o ABSOLUTE
+    ../../division.s                         0x00000000   Number         0  aeabi_sdiv_div0.o ABSOLUTE
+    ../../division.s                         0x00000000   Number         0  aeabi_sdiv.o ABSOLUTE
+    ../../divrt.s                            0x00000000   Number         0  divrt_9e.o ABSOLUTE
+    ../../divrt.s                            0x00000000   Number         0  divrt_9e_div0.o ABSOLUTE
+    ../../longlong.s                         0x00000000   Number         0  lludiv5.o ABSOLUTE
+    ../../memcpset.s                         0x00000000   Number         0  rt_memcpy_w.o ABSOLUTE
+    ../../signal.c                           0x00000000   Number         0  defsig_general.o ABSOLUTE
+    ../../signal.c                           0x00000000   Number         0  __raise.o ABSOLUTE
+    ../../signal.c                           0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
+    ../../signal.c                           0x00000000   Number         0  defsig_exit.o ABSOLUTE
+    ../../signal.c                           0x00000000   Number         0  defsig_fpe_formal.o ABSOLUTE
+    ../../signal.c                           0x00000000   Number         0  defsig_fpe_outer.o ABSOLUTE
+    ../../signal.s                           0x00000000   Number         0  defsig.o ABSOLUTE
+    ..\COMMON\LPC32XX\source\lpc32xx_adc_driver.c 0x00000000   Number         0  lpc32xx_adc_driver.o ABSOLUTE
+    ..\COMMON\LPC32XX\source\lpc32xx_clcdc_driver.c 0x00000000   Number         0  lpc32xx_clcdc_driver.o ABSOLUTE
+    ..\COMMON\LPC32XX\source\lpc32xx_clkpwr_driver.c 0x00000000   Number         0  lpc32xx_clkpwr_driver.o ABSOLUTE
+    ..\COMMON\LPC32XX\source\lpc32xx_dma_driver.c 0x00000000   Number         0  lpc32xx_dma_driver.o ABSOLUTE
+    ..\COMMON\LPC32XX\source\lpc32xx_gpio_driver.c 0x00000000   Number         0  lpc32xx_gpio_driver.o ABSOLUTE
+    ..\COMMON\LPC32XX\source\lpc32xx_hstimer_driver.c 0x00000000   Number         0  lpc32xx_hstimer_driver.o ABSOLUTE
+    ..\COMMON\LPC32XX\source\lpc32xx_hsuart_driver.c 0x00000000   Number         0  lpc32xx_hsuart_driver.o ABSOLUTE
+    ..\COMMON\LPC32XX\source\lpc32xx_i2c_driver.c 0x00000000   Number         0  lpc32xx_i2c_driver.o ABSOLUTE
+    ..\COMMON\LPC32XX\source\lpc32xx_i2s_driver.c 0x00000000   Number         0  lpc32xx_i2s_driver.o ABSOLUTE
+    ..\COMMON\LPC32XX\source\lpc32xx_intc_driver.c 0x00000000   Number         0  lpc32xx_intc_driver.o ABSOLUTE
+    ..\COMMON\LPC32XX\source\lpc32xx_kscan_driver.c 0x00000000   Number         0  lpc32xx_kscan_driver.o ABSOLUTE
+    ..\COMMON\LPC32XX\source\lpc32xx_mlcnand_driver.c 0x00000000   Number         0  lpc32xx_mlcnand_driver.o ABSOLUTE
+    ..\COMMON\LPC32XX\source\lpc32xx_mstimer_driver.c 0x00000000   Number         0  lpc32xx_mstimer_driver.o ABSOLUTE
+    ..\COMMON\LPC32XX\source\lpc32xx_pwm_driver.c 0x00000000   Number         0  lpc32xx_pwm_driver.o ABSOLUTE
+    ..\COMMON\LPC32XX\source\lpc32xx_rtc_driver.c 0x00000000   Number         0  lpc32xx_rtc_driver.o ABSOLUTE
+    ..\COMMON\LPC32XX\source\lpc32xx_sdcard_driver.c 0x00000000   Number         0  lpc32xx_sdcard_driver.o ABSOLUTE
+    ..\COMMON\LPC32XX\source\lpc32xx_slcnand_driver.c 0x00000000   Number         0  lpc32xx_slcnand_driver.o ABSOLUTE
+    ..\COMMON\LPC32XX\source\lpc32xx_spi_driver.c 0x00000000   Number         0  lpc32xx_spi_driver.o ABSOLUTE
+    ..\COMMON\LPC32XX\source\lpc32xx_ssp_driver.c 0x00000000   Number         0  lpc32xx_ssp_driver.o ABSOLUTE
+    ..\COMMON\LPC32XX\source\lpc32xx_timer_driver.c 0x00000000   Number         0  lpc32xx_timer_driver.o ABSOLUTE
+    ..\COMMON\LPC32XX\source\lpc32xx_tsc_driver.c 0x00000000   Number         0  lpc32xx_tsc_driver.o ABSOLUTE
+    ..\COMMON\LPC32XX\source\lpc32xx_uart_driver.c 0x00000000   Number         0  lpc32xx_uart_driver.o ABSOLUTE
+    ..\COMMON\LPC32XX\source\lpc32xx_vectors.s 0x00000000   Number         0  lpc32xx_vectors.o ABSOLUTE
+    ..\COMMON\LPC32XX\source\lpc32xx_wdt_driver.c 0x00000000   Number         0  lpc32xx_wdt_driver.o ABSOLUTE
+    ..\COMMON\LPC32XX\source\lpc3xxx_spwm_driver.c 0x00000000   Number         0  lpc3xxx_spwm_driver.o ABSOLUTE
+    ..\COMMON\LPC\source\lpc_api.c           0x00000000   Number         0  lpc_api.o ABSOLUTE
+    ..\COMMON\LPC\source\lpc_arm922t_cp15_driver.c 0x00000000   Number         0  lpc_arm922t_cp15_driver.o ABSOLUTE
+    ..\COMMON\LPC\source\lpc_bmp.c           0x00000000   Number         0  lpc_bmp.o ABSOLUTE
+    ..\COMMON\LPC\source\lpc_colors.c        0x00000000   Number         0  lpc_colors.o ABSOLUTE
+    ..\COMMON\LPC\source\lpc_fat16.c         0x00000000   Number         0  lpc_fat16.o ABSOLUTE
+    ..\COMMON\LPC\source\lpc_fat16_private.c 0x00000000   Number         0  lpc_fat16_private.o ABSOLUTE
+    ..\COMMON\LPC\source\lpc_fonts.c         0x00000000   Number         0  lpc_fonts.o ABSOLUTE
+    ..\COMMON\LPC\source\lpc_heap.c          0x00000000   Number         0  lpc_heap.o ABSOLUTE
+    ..\COMMON\LPC\source\lpc_helvr10.c       0x00000000   Number         0  lpc_helvr10.o ABSOLUTE
+    ..\COMMON\LPC\source\lpc_lbecc.c         0x00000000   Number         0  lpc_lbecc.o ABSOLUTE
+    ..\COMMON\LPC\source\lpc_lcd_params.c    0x00000000   Number         0  lpc_lcd_params.o ABSOLUTE
+    ..\COMMON\LPC\source\lpc_line_parser.c   0x00000000   Number         0  lpc_line_parser.o ABSOLUTE
+    ..\COMMON\LPC\source\lpc_nandflash_params.c 0x00000000   Number         0  lpc_nandflash_params.o ABSOLUTE
+    ..\COMMON\LPC\source\lpc_rom8x16.c       0x00000000   Number         0  lpc_rom8x16.o ABSOLUTE
+    ..\COMMON\LPC\source\lpc_rom8x8.c        0x00000000   Number         0  lpc_rom8x8.o ABSOLUTE
+    ..\COMMON\LPC\source\lpc_string.c        0x00000000   Number         0  lpc_string.o ABSOLUTE
+    ..\COMMON\LPC\source\lpc_swim.c          0x00000000   Number         0  lpc_swim.o ABSOLUTE
+    ..\COMMON\LPC\source\lpc_swim_font.c     0x00000000   Number         0  lpc_swim_font.o ABSOLUTE
+    ..\COMMON\LPC\source\lpc_swim_image.c    0x00000000   Number         0  lpc_swim_image.o ABSOLUTE
+    ..\COMMON\LPC\source\lpc_winfreesystem14x16.c 0x00000000   Number         0  lpc_winfreesystem14x16.o ABSOLUTE
+    ..\COMMON\LPC\source\lpc_x5x7.c          0x00000000   Number         0  lpc_x5x7.o ABSOLUTE
+    ..\COMMON\LPC\source\lpc_x6x13.c         0x00000000   Number         0  lpc_x6x13.o ABSOLUTE
+    ..\COMMON\YL3250\source\phy3250_board.c  0x00000000   Number         0  phy3250_board.o ABSOLUTE
+    ..\COMMON\YL3250\source\phy3250_nand.c   0x00000000   Number         0  phy3250_nand.o ABSOLUTE
+    dc.s                                     0x00000000   Number         0  dc.o ABSOLUTE
+    phy3250_kickstart.s                      0x00000000   Number         0  phy3250_kickstart.o ABSOLUTE
+    phy3250_kickstrt.c                       0x00000000   Number         0  phy3250_kickstrt.o ABSOLUTE
+    STARTUP                                  0x00038000   Section      108  phy3250_kickstart.o(STARTUP)
+    $v0                                      0x00038000   Number         0  phy3250_kickstart.o(STARTUP)
+    .text                                    0x0003806c   Section     7932  lpc32xx_clkpwr_driver.o(.text)
+    .text                                    0x00039f68   Section      448  lpc32xx_gpio_driver.o(.text)
+    .text                                    0x0003a128   Section     2900  phy3250_nand.o(.text)
+    .text                                    0x0003ac7c   Section      440  phy3250_kickstrt.o(.text)
+    phy3250_gpio_setup                       0x0003ac7c   ARM Code     100  phy3250_kickstrt.o(.text)
+    .text                                    0x0003ae34   Section      736  lludiv5.o(.text)
+    .text                                    0x0003b114   Section      100  rt_memcpy_w.o(.text)
+    .text                                    0x0003b178   Section      384  aeabi_sdiv.o(.text)
+    __arm_div8                               0x0003b1a4   ARM Code       0  aeabi_sdiv.o(.text)
+    __arm_div4                               0x0003b1d4   ARM Code       0  aeabi_sdiv.o(.text)
+    __arm_div_large                          0x0003b228   ARM Code       0  aeabi_sdiv.o(.text)
+    .text_udiv                               0x0003b2f8   Section       28  aeabi_sdiv.o(.text_udiv)
+    .data                                    0x0003b314   Section       68  lpc32xx_clkpwr_driver.o(.data)
+    pll_postdivs                             0x0003b338   Data          16  lpc32xx_clkpwr_driver.o(.data)
+    hclkdivs                                 0x0003b348   Data          16  lpc32xx_clkpwr_driver.o(.data)
+    .data                                    0x0003b358   Section        1  phy3250_nand.o(.data)
+    .bss                                     0x0003b35c   Section       20  phy3250_nand.o(.bss)
+    nandrcdat                                0x0003b35c   Data          20  phy3250_nand.o(.bss)
+
+    Global Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    BuildAttributes$$THM_ISAv2$ARM_ISAv5$M$E$P$J$S$VFPv2$PE$FZ_POSZERO$A:L22$X:L11$S22$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OSPACE$EBA8$STANDARDLIB$REQ8$PRES8$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
+    __rt_SIGABRT_inner                        - Undefined Weak Reference
+    __rt_SIGCPPL_inner                        - Undefined Weak Reference
+    __rt_SIGILL_inner                         - Undefined Weak Reference
+    __rt_SIGINT_inner                         - Undefined Weak Reference
+    __rt_SIGPVFN_inner                        - Undefined Weak Reference
+    __rt_SIGRTMEM_inner                       - Undefined Weak Reference
+    __rt_SIGRTRED_inner                       - Undefined Weak Reference
+    __rt_SIGSEGV_inner                        - Undefined Weak Reference
+    __rt_SIGSTAK_inner                        - Undefined Weak Reference
+    __rt_SIGTERM_inner                        - Undefined Weak Reference
+    __rt_SIGUSR1_inner                        - Undefined Weak Reference
+    __rt_SIGUSR2_inner                        - Undefined Weak Reference
+    __rt_sigother_inner                       - Undefined Weak Reference
+    __sigvec_lookup                           - Undefined Weak Reference
+    arm926ejs_reset                          0x00038000   ARM Code       0  phy3250_kickstart.o(STARTUP)
+    clkpwr_abs                               0x0003806c   ARM Code      28  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_check_pll_setup                   0x00038088   ARM Code     852  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_pll_rate_from_val                 0x000383dc   ARM Code     152  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_pll_rate                          0x00038474   ARM Code      28  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_mask_and_set                      0x00038490   ARM Code      28  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_get_event_field                   0x000384ac   ARM Code     220  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_get_base_clock                    0x00038588   ARM Code     152  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_find_pll_cfg                      0x00038620   ARM Code    1000  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_pll397_setup                      0x00038a08   ARM Code      56  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_get_base_clock_rate               0x00038a40   ARM Code     544  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_hclkpll_setup                     0x00038c60   ARM Code     252  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_hclkpll_direct_setup              0x00038d5c   ARM Code      12  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_pll_dis_en                        0x00038d68   ARM Code     224  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_is_pll_locked                     0x00038e48   ARM Code     184  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_mainosc_setup                     0x00038f00   ARM Code      48  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_sysclk_setup                      0x00038f30   ARM Code      84  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_get_osc                           0x00038f84   ARM Code      28  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_set_hclk_divs                     0x00038fa0   ARM Code     112  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_force_arm_hclk_to_pclk            0x00039010   ARM Code      36  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_set_mode                          0x00039034   ARM Code     128  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_clk_en_dis                        0x000390b4   ARM Code    1024  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_autoclk_en_dis                    0x000394b4   ARM Code     164  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_get_clock_rate                    0x00039558   ARM Code     320  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_wk_event_en_dis                   0x00039698   ARM Code     108  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_is_raw_event_active               0x00039704   ARM Code      84  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_is_msk_event_active               0x00039758   ARM Code      84  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_clear_event                       0x000397ac   ARM Code      72  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_set_event_pol                     0x000397f4   ARM Code     184  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_set_mux                           0x000398ac   ARM Code     428  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_set_mux_state                     0x00039a58   ARM Code     484  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_setup_mcard_ctrlr                 0x00039c3c   ARM Code      88  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_set_i2c_driver                    0x00039c94   ARM Code      88  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_setup_pwm                         0x00039cec   ARM Code     108  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_setup_nand_ctrlr                  0x00039d58   ARM Code      56  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_setup_adc_ts                      0x00039d90   ARM Code      28  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_setup_ssp                         0x00039dac   ARM Code      76  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_setup_i2s                         0x00039df8   ARM Code      92  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_setup_lcd                         0x00039e54   ARM Code     204  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_select_enet_iface                 0x00039f20   ARM Code      56  lpc32xx_clkpwr_driver.o(.text)
+    clkpwr_halt_cpu                          0x00039f58   ARM Code      12  lpc32xx_clkpwr_driver.o(.text)
+    gpio_set_gpo_state                       0x00039f68   ARM Code      48  lpc32xx_gpio_driver.o(.text)
+    gpio_set_dir                             0x00039f98   ARM Code      48  lpc32xx_gpio_driver.o(.text)
+    gpio_set_sdr_state                       0x00039fc8   ARM Code      48  lpc32xx_gpio_driver.o(.text)
+    gpio_set_p0_state                        0x00039ff8   ARM Code      48  lpc32xx_gpio_driver.o(.text)
+    gpio_set_p0_dir                          0x0003a028   ARM Code      48  lpc32xx_gpio_driver.o(.text)
+    gpio_set_p1_state                        0x0003a058   ARM Code      48  lpc32xx_gpio_driver.o(.text)
+    gpio_set_p1_dir                          0x0003a088   ARM Code      48  lpc32xx_gpio_driver.o(.text)
+    i2s_pin_mux                              0x0003a0b8   ARM Code     108  lpc32xx_gpio_driver.o(.text)
+    mlc_cmd                                  0x0003a128   ARM Code      12  phy3250_nand.o(.text)
+    mlc_addr                                 0x0003a134   ARM Code      12  phy3250_nand.o(.text)
+    mlc_wait_ready                           0x0003a140   ARM Code      24  phy3250_nand.o(.text)
+    mlc_get_status                           0x0003a158   ARM Code      32  phy3250_nand.o(.text)
+    mlc_write_addr                           0x0003a178   ARM Code     168  phy3250_nand.o(.text)
+    mlc_write_page                           0x0003a220   ARM Code     424  phy3250_nand.o(.text)
+    mlc_read_page                            0x0003a3c8   ARM Code     408  phy3250_nand.o(.text)
+    mlc_nand_detect                          0x0003a560   ARM Code     472  phy3250_nand.o(.text)
+    nand_clock_setup                         0x0003a738   ARM Code     240  phy3250_nand.o(.text)
+    nand_init                                0x0003a828   ARM Code      88  phy3250_nand.o(.text)
+    nand_erase_block                         0x0003a880   ARM Code     168  phy3250_nand.o(.text)
+    sector_to_nand                           0x0003a928   ARM Code      64  phy3250_nand.o(.text)
+    nand_read_sector                         0x0003a968   ARM Code      56  phy3250_nand.o(.text)
+    nand_write_sector                        0x0003a9a0   ARM Code      56  phy3250_nand.o(.text)
+    nand_read_sectors                        0x0003a9d8   ARM Code     280  phy3250_nand.o(.text)
+    nand_write_sectors                       0x0003aaf0   ARM Code     280  phy3250_nand.o(.text)
+    nand_to_sector                           0x0003ac08   ARM Code      20  phy3250_nand.o(.text)
+    phy3250_nand_wp                          0x0003ac1c   ARM Code      48  phy3250_nand.o(.text)
+    c_entry                                  0x0003ace0   ARM Code     324  phy3250_kickstrt.o(.text)
+    __aeabi_uldivmod                         0x0003ae34   ARM Code       0  lludiv5.o(.text)
+    _ll_udiv                                 0x0003ae34   ARM Code     736  lludiv5.o(.text)
+    _ll_udiv_small                           0x0003ae94   ARM Code       0  lludiv5.o(.text)
+    _ll_udiv_big                             0x0003afa4   ARM Code       0  lludiv5.o(.text)
+    _ll_udiv_ginormous                       0x0003b0d8   ARM Code       0  lludiv5.o(.text)
+    _ll_div0                                 0x0003b0f8   ARM Code       0  lludiv5.o(.text)
+    __aeabi_memcpy4                          0x0003b114   ARM Code       0  rt_memcpy_w.o(.text)
+    __aeabi_memcpy8                          0x0003b114   ARM Code       0  rt_memcpy_w.o(.text)
+    __rt_memcpy_w                            0x0003b114   ARM Code     100  rt_memcpy_w.o(.text)
+    _memcpy_lastbytes_aligned                0x0003b160   ARM Code       0  rt_memcpy_w.o(.text)
+    __aeabi_idiv                             0x0003b178   ARM Code       0  aeabi_sdiv.o(.text)
+    __aeabi_idivmod                          0x0003b178   ARM Code     384  aeabi_sdiv.o(.text)
+    __aeabi_uidiv                            0x0003b2f8   ARM Code       0  aeabi_sdiv.o(.text_udiv)
+    __aeabi_uidivmod                         0x0003b2f8   ARM Code      28  aeabi_sdiv.o(.text_udiv)
+    clkpwr_base_clk                          0x0003b314   Data          34  lpc32xx_clkpwr_driver.o(.data)
+    islargeblock                             0x0003b358   Data           1  phy3250_nand.o(.data)
+
+
+================================================================================
+
+Memory Map of the image
+
+  Image Entry point : 0x00038000
+
+  Load Region FLASH (Base: 0x00038000, Size: 0x0000335c, Max: 0xffffffff, ABSOLUTE)
+
+    Execution Region ER_RO (Base: 0x00038000, Size: 0x00003314, Max: 0xffffffff, ABSOLUTE)
+
+    Base Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x00038000   0x0000006c   Code   RO          886  * STARTUP             phy3250_kickstart.o
+    0x0003806c   0x00001efc   Code   RO          418    .text               lpc32xx_clkpwr_driver.o
+    0x00039f68   0x000001c0   Code   RO          456    .text               lpc32xx_gpio_driver.o
+    0x0003a128   0x00000b54   Code   RO          853    .text               phy3250_nand.o
+    0x0003ac7c   0x000001b8   Code   RO          874    .text               phy3250_kickstrt.o
+    0x0003ae34   0x000002e0   Code   RO          891    .text               lludiv5.o(c_5.l)
+    0x0003b114   0x00000064   Code   RO          893    .text               rt_memcpy_w.o(c_5.l)
+    0x0003b178   0x00000180   Code   RO          895    .text               aeabi_sdiv.o(c_5.l)
+    0x0003b2f8   0x0000001c   Code   RO          896    .text_udiv          aeabi_sdiv.o(c_5.l)
+
+
+    Execution Region ER_RW (Base: 0x0003b314, Size: 0x00000048, Max: 0xffffffff, ABSOLUTE)
+
+    Base Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x0003b314   0x00000044   Data   RW          419    .data               lpc32xx_clkpwr_driver.o
+    0x0003b358   0x00000001   Data   RW          854    .data               phy3250_nand.o
+
+
+    Execution Region ER_ZI (Base: 0x0003b35c, Size: 0x00000014, Max: 0xffffffff, ABSOLUTE)
+
+    Base Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x0003b35c   0x00000014   Zero   RW          855    .bss                phy3250_nand.o
+
+
+================================================================================
+
+Image component sizes
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
+
+         0          0          0          0          0       4512   lpc32xx_clcdc_driver.o
+      7932        156          0         68          0      16349   lpc32xx_clkpwr_driver.o
+       448          4          0          0          0       2101   lpc32xx_gpio_driver.o
+         0          0          0          0          0         20   lpc32xx_vectors.o
+         0          0          0          0          0       2988   lpc_api.o
+       108         12          0          0          0        244   phy3250_kickstart.o
+       440         16          0          0          0       1286   phy3250_kickstrt.o
+      2900         48          0          1         20       6904   phy3250_nand.o
+
+    ------------------------------------------------------------------------
+     11828        236          0         72         20      34404   Object Totals
+         0          0          0          0          0          0   (incl. Generated)
+         0          0          0          3          0          0   (incl. Padding)
+
+    ------------------------------------------------------------------------
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Member Name
+
+       412          0          0          0          0          0   aeabi_sdiv.o
+       736          0          0          0          0          0   lludiv5.o
+       100          0          0          0          0          0   rt_memcpy_w.o
+
+    ------------------------------------------------------------------------
+      1248          0          0          0          0          0   Library Totals
+         0          0          0          0          0          0   (incl. Padding)
+
+    ------------------------------------------------------------------------
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Name
+
+      1248          0          0          0          0          0   c_5.l
+
+    ------------------------------------------------------------------------
+      1248          0          0          0          0          0   Library Totals
+
+    ------------------------------------------------------------------------
+
+================================================================================
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
+
+     13076        236          0         72         20      34404   Grand Totals
+     13076        236          0         72         20      34404   ELF Image Totals
+     13076        236          0         72          0          0   ROM Totals
+
+================================================================================
+
+    Total RO  Size (Code + RO Data)                13076 (  12.77kB)
+    Total RW  Size (RW Data + ZI Data)                92 (   0.09kB)
+    Total ROM Size (Code + RO Data + RW Data)      13148 (  12.84kB)
+
+================================================================================
+

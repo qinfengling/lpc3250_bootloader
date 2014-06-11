@@ -1,0 +1,164 @@
+### uVision2 Project, (C) Keil Software
+### Do not modify !
+
+Target (Target 1), 0x0004 // Tools: 'ARM-ADS'
+
+Group (LPC)
+Group (CSP)
+Group (BSP)
+Group (IP)
+Group (app)
+
+File 1,1,<..\COMMON\LPC\source\lpc_api.c><lpc_api.c>
+File 1,1,<..\COMMON\LPC\source\lpc_arm922t_cp15_driver.c><lpc_arm922t_cp15_driver.c>
+File 1,1,<..\COMMON\LPC\source\lpc_bmp.c><lpc_bmp.c>
+File 1,1,<..\COMMON\LPC\source\lpc_colors.c><lpc_colors.c>
+File 1,1,<..\COMMON\LPC\source\lpc_fat16.c><lpc_fat16.c>
+File 1,1,<..\COMMON\LPC\source\lpc_fat16_private.c><lpc_fat16_private.c>
+File 1,1,<..\COMMON\LPC\source\lpc_fonts.c><lpc_fonts.c>
+File 1,1,<..\COMMON\LPC\source\lpc_heap.c><lpc_heap.c>
+File 1,1,<..\COMMON\LPC\source\lpc_helvr10.c><lpc_helvr10.c>
+File 1,1,<..\COMMON\LPC\source\lpc_lbecc.c><lpc_lbecc.c>
+File 1,1,<..\COMMON\LPC\source\lpc_lcd_params.c><lpc_lcd_params.c>
+File 1,1,<..\COMMON\LPC\source\lpc_line_parser.c><lpc_line_parser.c>
+File 1,1,<..\COMMON\LPC\source\lpc_nandflash_params.c><lpc_nandflash_params.c>
+File 1,1,<..\COMMON\LPC\source\lpc_rom8x8.c><lpc_rom8x8.c>
+File 1,1,<..\COMMON\LPC\source\lpc_rom8x16.c><lpc_rom8x16.c>
+File 1,1,<..\COMMON\LPC\source\lpc_string.c><lpc_string.c>
+File 1,1,<..\COMMON\LPC\source\lpc_swim.c><lpc_swim.c>
+File 1,1,<..\COMMON\LPC\source\lpc_swim_font.c><lpc_swim_font.c>
+File 1,1,<..\COMMON\LPC\source\lpc_swim_image.c><lpc_swim_image.c>
+File 1,1,<..\COMMON\LPC\source\lpc_winfreesystem14x16.c><lpc_winfreesystem14x16.c>
+File 1,1,<..\COMMON\LPC\source\lpc_x5x7.c><lpc_x5x7.c>
+File 1,1,<..\COMMON\LPC\source\lpc_x6x13.c><lpc_x6x13.c>
+File 2,1,<..\COMMON\LPC32XX\source\lpc32xx_clkpwr_driver.c><lpc32xx_clkpwr_driver.c>
+File 2,1,<..\COMMON\LPC32XX\source\lpc32xx_gpio_driver.c><lpc32xx_gpio_driver.c>
+File 2,1,<..\COMMON\LPC32XX\source\lpc32xx_hstimer_driver.c><lpc32xx_hstimer_driver.c>
+File 2,1,<..\COMMON\LPC32XX\source\lpc32xx_hsuart_driver.c><lpc32xx_hsuart_driver.c>
+File 2,1,<..\COMMON\LPC32XX\source\lpc32xx_intc_driver.c><lpc32xx_intc_driver.c>
+File 2,1,<..\COMMON\LPC32XX\source\lpc32xx_mlcnand_driver.c><lpc32xx_mlcnand_driver.c>
+File 2,1,<..\COMMON\LPC32XX\source\lpc32xx_mstimer_driver.c><lpc32xx_mstimer_driver.c>
+File 2,1,<..\COMMON\LPC32XX\source\lpc32xx_sdcard_driver.c><lpc32xx_sdcard_driver.c>
+File 2,1,<..\COMMON\LPC32XX\source\lpc32xx_spi_driver.c><lpc32xx_spi_driver.c>
+File 2,1,<..\COMMON\LPC32XX\source\lpc32xx_ssp_driver.c><lpc32xx_ssp_driver.c>
+File 2,1,<..\COMMON\LPC32XX\source\lpc32xx_dma_driver.c><lpc32xx_dma_driver.c>
+File 2,1,<..\COMMON\LPC32XX\source\lpc32xx_timer_driver.c><lpc32xx_timer_driver.c>
+File 2,1,<..\COMMON\LPC32XX\source\lpc32xx_uart_driver.c><lpc32xx_uart_driver.c>
+File 2,2,<..\COMMON\LPC32XX\source\lpc32xx_vectors.s><lpc32xx_vectors.s>
+File 3,1,<..\COMMON\YL3250\source\phy3250_board.c><phy3250_board.c>
+File 3,1,<..\COMMON\YL3250\source\phy3250_nand.c><phy3250_nand.c>
+File 4,1,<..\IP\source\s1l_bootmgr.c><s1l_bootmgr.c>
+File 4,1,<..\IP\source\s1l_cmds.c><s1l_cmds.c>
+File 4,1,<..\IP\source\s1l_cmds_core.c><s1l_cmds_core.c>
+File 4,1,<..\IP\source\s1l_cmds_flash.c><s1l_cmds_flash.c>
+File 4,1,<..\IP\source\s1l_cmds_image.c><s1l_cmds_image.c>
+File 4,1,<..\IP\source\s1l_fat.c><s1l_fat.c>
+File 4,1,<..\IP\source\s1l_image_mngt.c><s1l_image_mngt.c>
+File 4,1,<..\IP\source\s1l_line_input.c><s1l_line_input.c>
+File 4,1,<..\IP\source\s1l_memtests.c><s1l_memtests.c>
+File 4,1,<..\IP\source\s1l_sys.c><s1l_sys.c>
+File 4,2,<..\IP\source\s1l_except.s><s1l_except.s>
+File 4,2,<..\IP\source\s1l_movdat.s><s1l_movdat.s>
+File 5,1,<..\sys_hw.c><sys_hw.c>
+File 5,1,<..\sys_hw_cmd_group.c><sys_hw_cmd_group.c>
+File 5,1,<..\sys_mmu_cmd_group.c><sys_mmu_cmd_group.c>
+File 5,1,<..\sysapi_blkdev.c><sysapi_blkdev.c>
+File 5,1,<..\sysapi_eeprom.c><sysapi_eeprom.c>
+File 5,1,<..\sysapi_flash.c><sysapi_flash.c>
+File 5,1,<..\sysapi_misc.c><sysapi_misc.c>
+File 5,1,<..\sysapi_termio.c><sysapi_termio.c>
+File 5,1,<..\sysapi_timer.c><sysapi_timer.c>
+File 5,1,<..\COMMON\YL3250\startup\phy3250_startup.c><phy3250_startup.c>
+File 5,2,<..\COMMON\YL3250\startup\phy3250_startup_entry.s><phy3250_startup_entry.s>
+
+
+Options 1,0,0  // Target 'Target 1'
+ Device (LPC3250)
+ Vendor (NXP (founded by Philips))
+ Cpu (IRAM(0x08000000-0x0803FFFF) IROM(0-0x3FFF) CLOCK(13000000) CPUTYPE(ARM926EJ-S) FPU(ANSI))
+ FlashUt ()
+ StupF ("STARTUP\Philips\LPC3000.s" ("Philips LPC3000 Startup Code"))
+ FlashDR ()
+ DevID (4596)
+ Rgf (LPC32x0.H)
+ Mem ()
+ C ()
+ A ()
+ RL ()
+ OH ()
+ DBC_IFX ()
+ DBC_CMS ()
+ DBC_AMS ()
+ DBC_LMS ()
+ UseEnv=0
+ EnvBin ()
+ EnvInc ()
+ EnvLib ()
+ EnvReg (ÿPhilips\)
+ OrgReg (ÿPhilips\)
+ TgStat=16
+ OutDir (.\output\)
+ OutName (keil_s1l)
+ GenApp=1
+ GenLib=0
+ GenHex=1
+ Debug=1
+ Browse=1
+ LstDir (.\)
+ HexSel=1
+ MG32K=0
+ TGMORE=0
+ RunUsr 0 1 <c:\Keil\ARM\BIN31\fromelf.exe --bin -o ./output/keil_s1l.bin ./output/keil_s1l.axf>
+ RunUsr 1 0 <c:\Keil\ARM\BIN31\fromelf.exe --m32 -o ./output/keil_s1l.srec ./output/keil_s1l.axf>
+ BrunUsr 0 0 <>
+ BrunUsr 1 0 <>
+ CrunUsr 0 0 <>
+ CrunUsr 1 0 <>
+ SVCSID <>
+ GLFLAGS=1790
+ ADSFLGA { 243,31,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }
+ ACPUTYP (ARM926EJ-S)
+ RVDEV ()
+ ADSTFLGA { 0,204,0,2,99,0,0,66,0,0,0,0,0,0,0,0,0,0,0,0 }
+ OCMADSOCM { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }
+ OCMADSIRAM { 0,0,0,0,8,0,0,4,0 }
+ OCMADSIROM { 1,0,0,0,0,0,64,0,0 }
+ OCMADSXRAM { 0,0,0,0,0,0,0,0,0 }
+ OCR_RVCT { 1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,64,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,4,0,0,0,0,0,0,0,0,0,0 }
+ RV_STAVEC ()
+ ADSCCFLG { 9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }
+ ADSCMISC ()
+ ADSCDEFN (LPC_CHIP=3250)
+ ADSCUDEF ()
+ ADSCINCD (..\COMMON\YL3250\startup;..\COMMON\LPC\include;..\COMMON\LPC32XX\include;..\COMMON\YL3250\include;..\IP\include)
+ ADSASFLG { 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }
+ ADSAMISC ()
+ ADSADEFN ()
+ ADSAUDEF ()
+ ADSAINCD ()
+ PropFld { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }
+ IncBld=1
+ AlwaysBuild=0
+ GenAsm=0
+ AsmAsm=0
+ PublicsOnly=0
+ StopCode=3
+ CustArgs ()
+ LibMods ()
+ ADSLDFG { 16,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }
+ ADSLDTA (0x00000000)
+ ADSLDDA (0x08000000)
+ ADSLDSC (.\keil_simple.sct)
+ ADSLDIB ()
+ ADSLDIC ()
+ ADSLDMC ()
+ ADSLDIF ()
+ ADSLDDW ()
+  OPTDL (SARM.DLL)(-cLPC3000)(DARMP3.DLL)(-pLPC3250)(SARM.DLL)()(TARMP3.DLL)(-pLPC3000)
+  OPTDBG 48638,6,()()()()()()()()()(.\board_init.ini) (Segger\JLTAgdi.dll)()()()
+ FLASH1 { 1,0,0,0,1,0,0,0,0,16,0,0,0,0,0,0,0,0,0,0 }
+ FLASH2 (BIN\UL2ARM.DLL)
+ FLASH3 ("" ())
+ FLASH4 ()
+EndOpt
+

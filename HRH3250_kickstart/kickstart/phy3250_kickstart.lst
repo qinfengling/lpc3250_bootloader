@@ -1,0 +1,336 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                       ;;;;;;;;;;;;;;;;
+    2 00000000         ; $Id:: phy3250_kickstart.s 460 2008-03-25 19:05:47Z wel
+                       lsk            $
+    3 00000000         ; 
+    4 00000000         ; Project: Phytec 3250 board startup code
+    5 00000000         ;
+    6 00000000         ; Description:
+    7 00000000         ;     Basic startup code for the Phytec 3250 board
+    8 00000000         ;
+    9 00000000         ; Notes:
+   10 00000000         ;     This version of the file is for the Realview 3.x t
+                       oolset.
+   11 00000000         ;
+   12 00000000         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                       ;;;;;;;;;;;;;;;;
+   13 00000000         ; Software that is described herein is for illustrative 
+                       purposes only  
+   14 00000000         ; which provides customers with programming information 
+                       regarding the  
+   15 00000000         ; products. This software is supplied "AS IS" without an
+                       y warranties.  
+   16 00000000         ; NXP Semiconductors assumes no responsibility or liabil
+                       ity for the 
+   17 00000000         ; use of the software, conveys no license or title under
+                        any patent, 
+   18 00000000         ; copyright, or mask work right to the product. NXP Semi
+                       conductors 
+   19 00000000         ; reserves the right to make changes in the software wit
+                       hout 
+   20 00000000         ; notification. NXP Semiconductors also make no represen
+                       tation or 
+   21 00000000         ; warranty that such application will be suitable for th
+                       e specified 
+   22 00000000         ; use without further testing or modification. 
+   23 00000000         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                       ;;;;;;;;;;;;;;;;
+   24 00000000         
+   25 00000000                 export           arm926ejs_reset
+   26 00000000         
+   27 00000000         ; This is the user application that is called by the sta
+                       rtup code
+   28 00000000         ; once board initialization is complete
+   29 00000000                 extern           c_entry
+   30 00000000         
+   31 00000000         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                       ;;;;;;;;;;;;;;;;
+   32 00000000         ; Private defines and data
+   33 00000000         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                       ;;;;;;;;;;;;;;;;
+   34 00000000         
+   35 00000000 00000013 
+                       MODE_SVC
+                               EQU              0x013
+   36 00000000 00000080 
+                       I_MASK  EQU              0x080
+   37 00000000 00000040 
+                       F_MASK  EQU              0x040
+   38 00000000         
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   39 00000000         ; End of internal RAM
+   40 00000000 08040000 
+                       END_OF_IRAM
+                               EQU              0x08040000
+   41 00000000         
+   42 00000000         ; Masks used to disable and enable the MMU and caches
+   43 00000000 FFFFEFFA 
+                       MMU_DISABLE_MASK
+                               EQU              0xFFFFEFFA
+   44 00000000         
+   45 00000000                 PRESERVE8
+   46 00000000                 AREA             STARTUP, CODE ; Startup code 
+   47 00000000                 ENTRY
+   48 00000000         
+   49 00000000         ; This initial handler is only for reset, a real applica
+                       tion will
+   50 00000000         ; replace this exception handler in memory with a more c
+                       apable one
+   51 00000000         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                       ;;;;;;;;;;;;;;;;
+   52 00000000         ;
+   53 00000000         ; Function: arm926ejs_reset_handler
+   54 00000000         ;
+   55 00000000         ; Purpose: Reset vector entry point
+   56 00000000         ;
+   57 00000000         ; Description:
+   58 00000000         ;     Place ARM core in supervisor mode and disable inte
+                       rrupts. Disable
+   59 00000000         ;     the MMU and caches. Setup a basic stack pointer an
+                       d call the
+   60 00000000         ;     system init function to set up the memory interfac
+                       es, MMU
+   61 00000000         ;     table, initialize code and data regions, and any o
+                       ther board
+   62 00000000         ;     specific initialization. Setup the base address fo
+                       r the MMU
+   63 00000000         ;     translation table and enable the MMU and caches. S
+                       etup stacks for
+   64 00000000         ;     all ARM core modes and jump to the c_entry() funct
+                       ion.
+   65 00000000         ;
+   66 00000000         ; Parameters: NA
+   67 00000000         ;
+   68 00000000         ; Outputs; NA
+   69 00000000         ;
+   70 00000000         ; Returns: NA
+   71 00000000         ;
+   72 00000000         ; Notes: NA
+   73 00000000         ;
+   74 00000000         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                       ;;;;;;;;;;;;;;;;
+   75 00000000         arm926ejs_reset
+   76 00000000         ; Put the processor is in system mode with interrupts di
+                       sabled
+   77 00000000 E3A000D3        MOV              r0, #MODE_SVC:OR:I_MASK:OR:F_MA
+SK
+   78 00000004 E12FF000        MSR              cpsr_cxsf, r0
+   79 00000008         
+   80 00000008         ; Ensure the MMU is disabled
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+   81 00000008 EE111F10        MRC              p15, 0, r1, c1, c0, 0
+   82 0000000C E59F204C        LDR              r2,=MMU_DISABLE_MASK
+   83 00000010 E0011002        AND              r1, r1, r2
+   84 00000014 EE011F10        MCR              p15, 0, r1, c1, c0, 0
+   85 00000018         
+   86 00000018         clearzi_exit
+   87 00000018         ; Enter SVC mode and setup the SVC stack pointer.
+   88 00000018         ; This is the mode for runtime initialization.
+   89 00000018 E3A010C0        MOV              r1, #I_MASK:OR:F_MASK 
+                                                            ; No Interrupts
+   90 0000001C E3810013        ORR              r0, r1, #MODE_SVC
+   91 00000020 E12FF000        MSR              cpsr_cxsf, r0
+   92 00000024 E59FB038        LDR              r11, =END_OF_IRAM
+   93 00000028 E1A0D00B        MOV              sp, r11
+   94 0000002C         
+   95 0000002C         ; Relocate 15.5K of image
+   96 0000002C E59F0030        LDR              r0, =END_OF_IRAM
+   97 00000030 E3A01902        LDR              r1, =0x8000
+   98 00000034 E0400001        SUB              r0, r0, r1
+   99 00000038 E1A08000        MOV              r8, r0
+  100 0000003C E3A02000        MOV              r2, #0
+  101 00000040 E3A01901        LDR              r1, =0x4000
+  102 00000044         
+  103 00000044         loopmove
+  104 00000044 E4923004        LDR              r3, [r2], #4
+  105 00000048 E4803004        STR              r3, [r0], #4
+  106 0000004C E2411004        SUB              r1, r1, #4
+  107 00000050 E3510000        CMP              r1, #0
+  108 00000054 1AFFFFFA        BNE              loopmove
+  109 00000058         
+  110 00000058         ; Get address of application to execute
+  111 00000058 E59F0008        LDR              r0, =c_entry
+  112 0000005C E12FFF10        BX               r0
+  113 00000060         
+  114 00000060                 END
+              FFFFEFFA 
+              08040000 
+              00000000 
+Command Line: --debug --xref --device=DARMP3 --fpu=VFPv2 --apcs=interwork -o.\o
+utput\phy3250_kickstart.o -IC:\Keil\ARM\INC\Philips --list=phy3250_kickstart.ls
+t phy3250_kickstart.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+STARTUP 00000000
+
+Symbol: STARTUP
+   Definitions
+      At line 46 in file phy3250_kickstart.s
+   Uses
+      None
+Comment: STARTUP unused
+arm926ejs_reset 00000000
+
+Symbol: arm926ejs_reset
+   Definitions
+      At line 75 in file phy3250_kickstart.s
+   Uses
+      At line 25 in file phy3250_kickstart.s
+Comment: arm926ejs_reset used once
+clearzi_exit 00000018
+
+Symbol: clearzi_exit
+   Definitions
+      At line 86 in file phy3250_kickstart.s
+   Uses
+      None
+Comment: clearzi_exit unused
+loopmove 00000044
+
+Symbol: loopmove
+   Definitions
+      At line 103 in file phy3250_kickstart.s
+   Uses
+      At line 108 in file phy3250_kickstart.s
+Comment: loopmove used once
+4 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.debug_info$$$STARTUP 00000000
+
+Symbol: .debug_info$$$STARTUP
+   Definitions
+      None
+   Uses
+      None
+Warning: .debug_info$$$STARTUP undefinedComment: .debug_info$$$STARTUP unused
+1 symbol
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.debug_line$$$STARTUP 00000000
+
+Symbol: .debug_line$$$STARTUP
+   Definitions
+      None
+   Uses
+      None
+Warning: .debug_line$$$STARTUP undefinedComment: .debug_line$$$STARTUP unused
+1 symbol
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.debug_abbrev 00000000
+
+Symbol: .debug_abbrev
+   Definitions
+      None
+   Uses
+      None
+Warning: .debug_abbrev undefinedComment: .debug_abbrev unused
+__ARM_asm.debug_abbrev 00000000
+
+Symbol: __ARM_asm.debug_abbrev
+   Definitions
+      None
+   Uses
+      None
+Warning: __ARM_asm.debug_abbrev undefinedComment: __ARM_asm.debug_abbrev unused
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+END_OF_IRAM 08040000
+
+Symbol: END_OF_IRAM
+   Definitions
+      At line 40 in file phy3250_kickstart.s
+   Uses
+      At line 92 in file phy3250_kickstart.s
+      At line 96 in file phy3250_kickstart.s
+
+F_MASK 00000040
+
+Symbol: F_MASK
+   Definitions
+      At line 37 in file phy3250_kickstart.s
+   Uses
+      At line 77 in file phy3250_kickstart.s
+      At line 89 in file phy3250_kickstart.s
+
+I_MASK 00000080
+
+Symbol: I_MASK
+   Definitions
+      At line 36 in file phy3250_kickstart.s
+   Uses
+      At line 77 in file phy3250_kickstart.s
+      At line 89 in file phy3250_kickstart.s
+
+MMU_DISABLE_MASK FFFFEFFA
+
+Symbol: MMU_DISABLE_MASK
+   Definitions
+      At line 43 in file phy3250_kickstart.s
+   Uses
+      At line 82 in file phy3250_kickstart.s
+Comment: MMU_DISABLE_MASK used once
+MODE_SVC 00000013
+
+Symbol: MODE_SVC
+   Definitions
+      At line 35 in file phy3250_kickstart.s
+   Uses
+      At line 77 in file phy3250_kickstart.s
+      At line 90 in file phy3250_kickstart.s
+
+5 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+c_entry 00000000
+
+Symbol: c_entry
+   Definitions
+      At line 29 in file phy3250_kickstart.s
+   Uses
+      At line 111 in file phy3250_kickstart.s
+Comment: c_entry used once
+1 symbol
+336 symbols in table

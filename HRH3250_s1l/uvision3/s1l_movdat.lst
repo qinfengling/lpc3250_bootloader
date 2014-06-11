@@ -1,0 +1,197 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                       ;;;;;;;;;;;;;;;;
+    2 00000000         ; $Id:: s1l_movdat.s 871 2008-07-07 22:36:49Z wellsk    
+                                      $
+    3 00000000         ; 
+    4 00000000         ; Project: Memmory test data move operation
+    5 00000000         ;
+    6 00000000         ; Description:
+    7 00000000         ;     64 byte aligned data move operation used for bench
+                       marking
+    8 00000000         ;
+    9 00000000         ; Notes:
+   10 00000000         ;     This version of the file is for the Realview 3.x t
+                       oolset.
+   11 00000000         ;
+   12 00000000         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                       ;;;;;;;;;;;;;;;;
+   13 00000000         ; Software that is described herein is for illustrative 
+                       purposes only  
+   14 00000000         ; which provides customers with programming information 
+                       regarding the  
+   15 00000000         ; products. This software is supplied "AS IS" without an
+                       y warranties.  
+   16 00000000         ; NXP Semiconductors assumes no responsibility or liabil
+                       ity for the 
+   17 00000000         ; use of the software, conveys no license or title under
+                        any patent, 
+   18 00000000         ; copyright, or mask work right to the product. NXP Semi
+                       conductors 
+   19 00000000         ; reserves the right to make changes in the software wit
+                       hout 
+   20 00000000         ; notification. NXP Semiconductors also make no represen
+                       tation or 
+   21 00000000         ; warranty that such application will be suitable for th
+                       e specified 
+   22 00000000         ; use without further testing or modification. 
+   23 00000000         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                       ;;;;;;;;;;;;;;;;
+   24 00000000         
+   25 00000000                 export           mmove
+   26 00000000         
+   27 00000000                 PRESERVE8
+   28 00000000                 AREA             MTEST, CODE
+   29 00000000         
+   30 00000000         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                       ;;;;;;;;;;;;;;;;
+   31 00000000         ;
+   32 00000000         ; Function: mmove
+   33 00000000         ;
+   34 00000000         ; Purpose: Perform aligned memory test
+   35 00000000         ;
+   36 00000000         ; Description:
+   37 00000000         ;     A simple LDM/STM copy loop.
+   38 00000000         ;
+   39 00000000         ; Parameters:
+   40 00000000         ;     r0 : source, 32-bit aligned
+   41 00000000         ;     r1 : destination, 32-bit aligned
+   42 00000000         ;     r2 : bytes (/16 granularity)
+   43 00000000         ;
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   44 00000000         ; Outputs; NA
+   45 00000000         ;
+   46 00000000         ; Returns: NA
+   47 00000000         ;
+   48 00000000         ; Notes: NA
+   49 00000000         ;
+   50 00000000         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                       ;;;;;;;;;;;;;;;;
+   51 00000000         mmove
+   52 00000000 E92D407F        STMFD            sp!, {r0 - r6, lr}
+   53 00000004 E3520000        cmp              r2, #0
+   54 00000008 0A000009        BEQ              lstdone     ; Test should be sk
+                                                            ipped, no size
+   55 0000000C         
+   56 0000000C         nloop
+   57 0000000C E8B00078        LDMIA            r0!, {r3-r6}
+   58 00000010 E8A10078        STMIA            r1!, {r3-r6}
+   59 00000014 E8B00078        LDMIA            r0!, {r3-r6}
+   60 00000018 E8A10078        STMIA            r1!, {r3-r6}
+   61 0000001C E8B00078        LDMIA            r0!, {r3-r6}
+   62 00000020 E8A10078        STMIA            r1!, {r3-r6}
+   63 00000024 E8B00078        LDMIA            r0!, {r3-r6}
+   64 00000028 E8A10078        STMIA            r1!, {r3-r6}
+   65 0000002C E2522040        SUBS             r2, r2, #64
+   66 00000030 1AFFFFF5        BNE              nloop
+   67 00000034         
+   68 00000034         lstdone
+   69 00000034 E8BD807F        LDMFD            sp!, {r0 - r6, pc}
+   70 00000038         
+   71 00000038                 END
+Command Line: --debug --xref --device=DARMP3 --fpu=VFPv2 --apcs=interwork -o.\o
+utput\s1l_movdat.o -IC:\Keil\ARM\INC\Philips --list=.\s1l_movdat.lst ..\IP\sour
+ce\s1l_movdat.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+MTEST 00000000
+
+Symbol: MTEST
+   Definitions
+      At line 28 in file ..\IP\source\s1l_movdat.s
+   Uses
+      None
+Comment: MTEST unused
+lstdone 00000034
+
+Symbol: lstdone
+   Definitions
+      At line 68 in file ..\IP\source\s1l_movdat.s
+   Uses
+      At line 54 in file ..\IP\source\s1l_movdat.s
+Comment: lstdone used once
+mmove 00000000
+
+Symbol: mmove
+   Definitions
+      At line 51 in file ..\IP\source\s1l_movdat.s
+   Uses
+      At line 25 in file ..\IP\source\s1l_movdat.s
+Comment: mmove used once
+nloop 0000000C
+
+Symbol: nloop
+   Definitions
+      At line 56 in file ..\IP\source\s1l_movdat.s
+   Uses
+      At line 66 in file ..\IP\source\s1l_movdat.s
+Comment: nloop used once
+4 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.debug_info$$$MTEST 00000000
+
+Symbol: .debug_info$$$MTEST
+   Definitions
+      None
+   Uses
+      None
+Warning: .debug_info$$$MTEST undefinedComment: .debug_info$$$MTEST unused
+1 symbol
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.debug_line$$$MTEST 00000000
+
+Symbol: .debug_line$$$MTEST
+   Definitions
+      None
+   Uses
+      None
+Warning: .debug_line$$$MTEST undefinedComment: .debug_line$$$MTEST unused
+1 symbol
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.debug_abbrev 00000000
+
+Symbol: .debug_abbrev
+   Definitions
+      None
+   Uses
+      None
+Warning: .debug_abbrev undefinedComment: .debug_abbrev unused
+__ARM_asm.debug_abbrev 00000000
+
+Symbol: __ARM_asm.debug_abbrev
+   Definitions
+      None
+   Uses
+      None
+Warning: __ARM_asm.debug_abbrev undefinedComment: __ARM_asm.debug_abbrev unused
+2 symbols
+328 symbols in table

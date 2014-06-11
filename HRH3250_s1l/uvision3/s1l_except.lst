@@ -1,0 +1,239 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                       ;;;;;;;;;;;;;;;;
+    2 00000000         ; $Id:: s1l_except.s 871 2008-07-07 22:36:49Z wellsk    
+                                      $
+    3 00000000         ; 
+    4 00000000         ; Project: Exception handler
+    5 00000000         ;
+    6 00000000         ; Description:
+    7 00000000         ;     Saves exception data, switches to SVC mode, and ju
+                       mps to;
+    8 00000000         ;     exception handler
+    9 00000000         ;
+   10 00000000         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                       ;;;;;;;;;;;;;;;;
+   11 00000000         ; Software that is described herein is for illustrative 
+                       purposes only  
+   12 00000000         ; which provides customers with programming information 
+                       regarding the  
+   13 00000000         ; products. This software is supplied "AS IS" without an
+                       y warranties.  
+   14 00000000         ; NXP Semiconductors assumes no responsibility or liabil
+                       ity for the 
+   15 00000000         ; use of the software, conveys no license or title under
+                        any patent, 
+   16 00000000         ; copyright, or mask work right to the product. NXP Semi
+                       conductors 
+   17 00000000         ; reserves the right to make changes in the software wit
+                       hout 
+   18 00000000         ; notification. NXP Semiconductors also make no represen
+                       tation or 
+   19 00000000         ; warranty that such application will be suitable for th
+                       e specified 
+   20 00000000         ; use without further testing or modification. 
+   21 00000000         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                       ;;;;;;;;;;;;;;;;
+   22 00000000         
+   23 00000000                 export           arm9_exchand
+   24 00000000         
+   25 00000000                 extern           excdata
+   26 00000000                 extern           trap_exception
+   27 00000000         
+   28 00000000 00000013 
+                       MODE_SVC
+                               EQU              0x013
+   29 00000000 00000080 
+                       I_MASK  EQU              0x080
+   30 00000000 00000040 
+                       F_MASK  EQU              0x040
+   31 00000000         
+   32 00000000                 PRESERVE8
+   33 00000000                 AREA             EXCEPT, CODE
+   34 00000000         
+   35 00000000         ; Exception handler simply saves some items in a global 
+                       variable
+   36 00000000         arm9_exchand
+   37 00000000         ; Get base address of storage area
+   38 00000000 E92D1800        STMFD            sp!, {r11-r12}
+   39 00000004 E59FB058        LDR              r11, =excdata
+   40 00000008         
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   41 00000008         ; Save current and previous status and
+   42 00000008 E10FC000        MRS              r12, cpsr
+   43 0000000C E48BC004        STR              r12, [r11], #4
+   44 00000010 E14FC000        MRS              r12, spsr
+   45 00000014 E48BC004        STR              r12, [r11], #4
+   46 00000018         
+   47 00000018         ; Saved address of exception
+   48 00000018 E48BE004        STR              lr, [r11], #4
+   49 0000001C         
+   50 0000001C         ; Save current registers
+   51 0000001C E48B0004        STR              r0, [r11], #4
+   52 00000020 E48B1004        STR              r1, [r11], #4
+   53 00000024 E48B2004        STR              r2, [r11], #4
+   54 00000028 E48B3004        STR              r3, [r11], #4
+   55 0000002C E48B4004        STR              r4, [r11], #4
+   56 00000030 E48B5004        STR              r5, [r11], #4
+   57 00000034 E48B6004        STR              r6, [r11], #4
+   58 00000038 E48B7004        STR              r7, [r11], #4
+   59 0000003C E48B8004        STR              r8, [r11], #4
+   60 00000040 E48B9004        STR              r9, [r11], #4
+   61 00000044 E48BA004        STR              r10, [r11], #4
+   62 00000048 E8BD0003        LDMFD            sp!, {r0-r1}
+   63 0000004C E48B0004        STR              r0, [r11], #4
+   64 00000050 E48B1004        STR              r1, [r11], #4
+   65 00000054         
+   66 00000054         ; Switch back to SVC mode and jump to handler
+   67 00000054         
+   68 00000054 E3A01040        MOV              r1, #F_MASK ; Enable IRQ
+   69 00000058 E3810013        ORR              r0, r1, #MODE_SVC
+   70 0000005C E12FF000        MSR              cpsr_cxsf, r0
+   71 00000060 EAFFFFFE        B                trap_exception
+   72 00000064         
+   73 00000064                 END
+              00000000 
+Command Line: --debug --xref --device=DARMP3 --fpu=VFPv2 --apcs=interwork -o.\o
+utput\s1l_except.o -IC:\Keil\ARM\INC\Philips --list=.\s1l_except.lst ..\IP\sour
+ce\s1l_except.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+EXCEPT 00000000
+
+Symbol: EXCEPT
+   Definitions
+      At line 33 in file ..\IP\source\s1l_except.s
+   Uses
+      None
+Comment: EXCEPT unused
+arm9_exchand 00000000
+
+Symbol: arm9_exchand
+   Definitions
+      At line 36 in file ..\IP\source\s1l_except.s
+   Uses
+      At line 23 in file ..\IP\source\s1l_except.s
+Comment: arm9_exchand used once
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.debug_info$$$EXCEPT 00000000
+
+Symbol: .debug_info$$$EXCEPT
+   Definitions
+      None
+   Uses
+      None
+Warning: .debug_info$$$EXCEPT undefinedComment: .debug_info$$$EXCEPT unused
+1 symbol
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.debug_line$$$EXCEPT 00000000
+
+Symbol: .debug_line$$$EXCEPT
+   Definitions
+      None
+   Uses
+      None
+Warning: .debug_line$$$EXCEPT undefinedComment: .debug_line$$$EXCEPT unused
+1 symbol
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.debug_abbrev 00000000
+
+Symbol: .debug_abbrev
+   Definitions
+      None
+   Uses
+      None
+Warning: .debug_abbrev undefinedComment: .debug_abbrev unused
+__ARM_asm.debug_abbrev 00000000
+
+Symbol: __ARM_asm.debug_abbrev
+   Definitions
+      None
+   Uses
+      None
+Warning: __ARM_asm.debug_abbrev undefinedComment: __ARM_asm.debug_abbrev unused
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+F_MASK 00000040
+
+Symbol: F_MASK
+   Definitions
+      At line 30 in file ..\IP\source\s1l_except.s
+   Uses
+      At line 68 in file ..\IP\source\s1l_except.s
+Comment: F_MASK used once
+I_MASK 00000080
+
+Symbol: I_MASK
+   Definitions
+      At line 29 in file ..\IP\source\s1l_except.s
+   Uses
+      None
+Comment: I_MASK unused
+MODE_SVC 00000013
+
+Symbol: MODE_SVC
+   Definitions
+      At line 28 in file ..\IP\source\s1l_except.s
+   Uses
+      At line 69 in file ..\IP\source\s1l_except.s
+Comment: MODE_SVC used once
+3 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+excdata 00000000
+
+Symbol: excdata
+   Definitions
+      At line 25 in file ..\IP\source\s1l_except.s
+   Uses
+      At line 39 in file ..\IP\source\s1l_except.s
+Comment: excdata used once
+trap_exception 00000000
+
+Symbol: trap_exception
+   Definitions
+      At line 26 in file ..\IP\source\s1l_except.s
+   Uses
+      At line 71 in file ..\IP\source\s1l_except.s
+Comment: trap_exception used once
+2 symbols
+333 symbols in table

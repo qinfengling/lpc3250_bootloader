@@ -1,0 +1,18 @@
+
+FLASH 0x00000000
+{
+	; The executable region starts at the load region
+    	ER_RO +0
+        {
+                phy3250_startup_entry.o (STARTUP, +FIRST) 
+                * (+RO) 
+        }
+        ER_RW +0
+        {
+                * (+RW)
+        }
+        ER_ZI +0        
+        {
+                * (+ZI)
+        }
+}

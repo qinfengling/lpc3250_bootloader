@@ -1,0 +1,9 @@
+# DO NOT DELETE
+
+phy3250_kickstrt.o: C:/nxpmcu/software/csps/lpc32xx/bsps/phy3250/include/phy3250_board.h
+phy3250_kickstrt.o: C:/nxpmcu/software/lpc/include/lpc_types.h
+phy3250_kickstrt.o: C:/nxpmcu/software/csps/lpc32xx/include/lpc32xx_chip.h
+phy3250_kickstrt.o: C:/nxpmcu/software/csps/lpc32xx/include/lpc32xx_emc.h
+phy3250_kickstrt.o: C:/nxpmcu/software/csps/lpc32xx/include/lpc32xx_gpio_driver.h
+phy3250_kickstrt.o: C:/nxpmcu/software/csps/lpc32xx/include/lpc32xx_gpio.h
+phy3250_kickstrt.o: C:/nxpmcu/software/csps/lpc32xx/bsps/phy3250/include/phy3250_nand.h

@@ -1,0 +1,827 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                       ;;;;;;;;;;;;;;;;
+    2 00000000         ; $Id:: phy3250_startup_entry.s 661 2008-04-25 23:00:08Z
+                        wellsk        $
+    3 00000000         ; 
+    4 00000000         ; Project: Phytec 3250 board startup code
+    5 00000000         ;
+    6 00000000         ; Description:
+    7 00000000         ;     Basic startup code for the Phytec 3250 board
+    8 00000000         ;
+    9 00000000         ; Notes:
+   10 00000000         ;     This version of the file is for the Realview 3.x t
+                       oolset.
+   11 00000000         ;
+   12 00000000         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                       ;;;;;;;;;;;;;;;;
+   13 00000000         ; Software that is described herein is for illustrative 
+                       purposes only  
+   14 00000000         ; which provides customers with programming information 
+                       regarding the  
+   15 00000000         ; products. This software is supplied "AS IS" without an
+                       y warranties.  
+   16 00000000         ; NXP Semiconductors assumes no responsibility or liabil
+                       ity for the 
+   17 00000000         ; use of the software, conveys no license or title under
+                        any patent, 
+   18 00000000         ; copyright, or mask work right to the product. NXP Semi
+                       conductors 
+   19 00000000         ; reserves the right to make changes in the software wit
+                       hout 
+   20 00000000         ; notification. NXP Semiconductors also make no represen
+                       tation or 
+   21 00000000         ; warranty that such application will be suitable for th
+                       e specified 
+   22 00000000         ; use without further testing or modification. 
+   23 00000000         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                       ;;;;;;;;;;;;;;;;
+   24 00000000         
+   25 00000000                 export           arm926ejs_reset
+   26 00000000                 export           dcache_flush
+   27 00000000         
+   28 00000000                 extern           phy3250_init
+   29 00000000                 extern           mmu_base_aadr
+   30 00000000                 extern           |Image$$ER_ZI$$ZI$$Base|
+   31 00000000                 extern           |Image$$ER_ZI$$ZI$$Length|
+   32 00000000         
+   33 00000000         ; This is the user application that is called by the sta
+                       rtup code
+   34 00000000         ; once board initialization is complete
+   35 00000000                 extern           c_entry
+   36 00000000         
+   37 00000000         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                       ;;;;;;;;;;;;;;;;
+   38 00000000         ; Private defines and data
+   39 00000000         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                       ;;;;;;;;;;;;;;;;
+   40 00000000         
+   41 00000000 00000010 
+                       MODE_USR
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+                               EQU              0x010
+   42 00000000 00000011 
+                       MODE_FIQ
+                               EQU              0x011
+   43 00000000 00000012 
+                       MODE_IRQ
+                               EQU              0x012
+   44 00000000 00000013 
+                       MODE_SVC
+                               EQU              0x013
+   45 00000000 00000017 
+                       MODE_ABORT
+                               EQU              0x017
+   46 00000000 0000001B 
+                       MODE_UNDEF
+                               EQU              0x01b
+   47 00000000 0000001F 
+                       MODE_SYSTEM
+                               EQU              0x01f
+   48 00000000 0000001F 
+                       MODE_BITS
+                               EQU              0x01f
+   49 00000000 00000080 
+                       I_MASK  EQU              0x080
+   50 00000000 00000040 
+                       F_MASK  EQU              0x040
+   51 00000000         
+   52 00000000         ; End of internal RAM
+   53 00000000 08040000 
+                       END_OF_IRAM
+                               EQU              0x08040000
+   54 00000000         
+   55 00000000         ; Masks used to disable and enable the MMU and caches
+   56 00000000 FFFFEFFA 
+                       MMU_DISABLE_MASK
+                               EQU              0xFFFFEFFA
+   57 00000000 00001005 
+                       MMU_ENABLE_MASK
+                               EQU              0x00001005
+   58 00000000         
+   59 00000000         ; Default stack sizes
+   60 00000000 00000200 
+                       FIQ_STACK_SIZE
+                               EQU              512
+   61 00000000 00000400 
+                       IRQ_STACK_SIZE
+                               EQU              1024
+   62 00000000 00000200 
+                       ABORT_STACK_SIZE
+                               EQU              512
+   63 00000000 00000200 
+                       UNDEF_STACK_SIZE
+                               EQU              512
+   64 00000000 00000200 
+                       SYSTEM_STACK_SIZE
+                               EQU              512
+   65 00000000 00001000 
+                       SVC_STACK_SIZE
+                               EQU              4096
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+   66 00000000         
+   67 00000000                 PRESERVE8
+   68 00000000                 AREA             STARTUP, CODE ; Startup code 
+   69 00000000                 ENTRY
+   70 00000000         
+   71 00000000         ; This initial handler is only for reset, a real applica
+                       tion will
+   72 00000000         ; replace this exception handler in memory with a more c
+                       apable one
+   73 00000000         arm926ejs_reset
+   74 00000000 EA000015        B                arm926ejs_reset_handler ; Reset
+                                                            
+   75 00000004         arm926ejs_undef
+   76 00000004 EAFFFFFE        B                .
+   77 00000008         arm926ejs_swi
+   78 00000008 EAFFFFFE        B                .
+   79 0000000C         arm926ejs_prefetch
+   80 0000000C EAFFFFFE        B                .
+   81 00000010         arm926ejs_abort
+   82 00000010 EAFFFFFE        B                .
+   83 00000014         arm926ejs_irq
+   84 00000014 EAFFFFFE        B                .
+   85 00000018         arm926ejs_fiq
+   86 00000018 EAFFFFFE        B                .
+   87 0000001C         
+   88 0000001C 00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00 00 00 
+              00               SPACE            0x40        ; Extra space for w
+                                                            hen vector table is
+                                                             moved
+   89 0000005C         
+   90 0000005C         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                       ;;;;;;;;;;;;;;;;
+   91 0000005C         ;
+   92 0000005C         ; Function: arm926ejs_reset_handler
+   93 0000005C         ;
+   94 0000005C         ; Purpose: Reset vector entry point
+   95 0000005C         ;
+   96 0000005C         ; Description:
+   97 0000005C         ;     Place ARM core in supervisor mode and disable inte
+
+
+
+ARM Macro Assembler    Page 4 
+
+
+                       rrupts. Disable
+   98 0000005C         ;     the MMU and caches. Setup a basic stack pointer an
+                       d call the
+   99 0000005C         ;     system init function to set up the memory interfac
+                       es, MMU
+  100 0000005C         ;     table, initialize code and data regions, and any o
+                       ther board
+  101 0000005C         ;     specific initialization. Setup the base address fo
+                       r the MMU
+  102 0000005C         ;     translation table and enable the MMU and caches. S
+                       etup stacks for
+  103 0000005C         ;     all ARM core modes and jump to the c_entry() funct
+                       ion.
+  104 0000005C         ;
+  105 0000005C         ; Parameters: NA
+  106 0000005C         ;
+  107 0000005C         ; Outputs; NA
+  108 0000005C         ;
+  109 0000005C         ; Returns: NA
+  110 0000005C         ;
+  111 0000005C         ; Notes: NA
+  112 0000005C         ;
+  113 0000005C         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                       ;;;;;;;;;;;;;;;;
+  114 0000005C         arm926ejs_reset_handler
+  115 0000005C         ; Put the processor is in system mode with interrupts di
+                       sabled
+  116 0000005C E3A000D3        MOV              r0, #MODE_SVC:OR:I_MASK:OR:F_MA
+SK
+  117 00000060 E12FF000        MSR              cpsr_cxsf, r0
+  118 00000064         
+  119 00000064         ; Ensure the MMU is disabled
+  120 00000064 EE111F10        MRC              p15, 0, r1, c1, c0, 0
+  121 00000068 E59F2128        LDR              r2,=MMU_DISABLE_MASK
+  122 0000006C E0011002        AND              r1, r1, r2
+  123 00000070 EE011F10        MCR              p15, 0, r1, c1, c0, 0
+  124 00000074         
+  125 00000074         ; Invalidate TLBs
+  126 00000074 E3A01000        MOV              r1,#0
+  127 00000078 EE081F17        MCR              p15, 0, r1, c8, c7, 0
+  128 0000007C         
+  129 0000007C         ; Invalidate both caches
+  130 0000007C EE071F17        MCR              p15, 0, r1, c7, c7, 0
+  131 00000080         
+  132 00000080         ; Enable instruction cache (for now)
+  133 00000080 EE111F10        MRC              p15, 0, r1, c1, c0, 0
+  134 00000084 E3A02A01        LDR              r2,=0x1000
+  135 00000088 E1811002        ORR              r1, r1, r2
+  136 0000008C EE011F10        MCR              p15, 0, r1, c1, c0, 0
+  137 00000090         
+  138 00000090         ; Get end of internal memory and set aside 16K for the p
+                       age table
+  139 00000090 E59FB104        LDR              r11, =END_OF_IRAM
+  140 00000094 E24BB901        SUB              r11, r11, #(16*1024)
+  141 00000098 E59F0100        LDR              r0, =mmu_base_aadr
+  142 0000009C E580B000        STR              r11, [r0]   ; Must be aligned o
+                                                            n a 16K boundary
+  143 000000A0         
+  144 000000A0         ; Setup current stack pointer to end of internal memory
+
+
+
+ARM Macro Assembler    Page 5 
+
+
+  145 000000A0 E24BB004        SUB              r11, r11, #4
+  146 000000A4 E1A0D00B        MOV              sp, r11
+  147 000000A8         
+  148 000000A8         ; Clear ZI segment
+  149 000000A8 E59F00F4        LDR              r0, =|Image$$ER_ZI$$ZI$$Base|
+  150 000000AC E59F10F4        LDR              r1, =|Image$$ER_ZI$$ZI$$Length|
+  151 000000B0 E3A02000        MOV              r2, #0
+  152 000000B4         clearzi
+  153 000000B4 E3510000        CMP              r1, #0
+  154 000000B8 0A000003        BEQ              clearzi_exit
+  155 000000BC E2411004        SUB              r1, r1, #4
+  156 000000C0 E5802000        STR              r2, [r0]
+  157 000000C4 E2800004        ADD              r0, r0, #4
+  158 000000C8 EAFFFFF9        B                clearzi
+  159 000000CC         
+  160 000000CC         clearzi_exit
+  161 000000CC         ; Initial Phytec board
+  162 000000CC EBFFFFFE        BL               phy3250_init
+  163 000000D0         
+  164 000000D0         ; Setup the Domain Access Control as all Manager
+  165 000000D0         ; Make all domains open, user can impose restrictions
+  166 000000D0 E3E01000        MVN              r1, #0
+  167 000000D4 EE031F10        MCR              p15, 0, r1, c3, c0, 0
+  168 000000D8         
+  169 000000D8         ; Setup Translation Table Base
+  170 000000D8 E59F00C0        LDR              r0, =mmu_base_aadr
+  171 000000DC E5903000        LDR              r3, [r0]
+  172 000000E0 EE023F10        MCR              p15, 0, r3, c2, c0, 0
+  173 000000E4         
+  174 000000E4         ; Setup jump to run out of virtual memory at location in
+                       VirtMem
+  175 000000E4 E59F50C0        LDR              r5, =inVirtMem
+  176 000000E8         
+  177 000000E8         ; Enable the MMU with instruction and data caches enable
+                       d
+  178 000000E8 EE111F10        MRC              p15, 0, r1, c1, c0, 0
+  179 000000EC E59F20BC        LDR              r2,=MMU_ENABLE_MASK
+  180 000000F0 E1811002        ORR              r1, r1, r2
+  181 000000F4 EE011F10        MCR              p15, 0, r1, c1, c0, 0
+  182 000000F8         
+  183 000000F8         ; Jump to the virtual address
+  184 000000F8 E1A0F005        MOV              pc, r5
+  185 000000FC         
+  186 000000FC         ; The following NOPs are to clear the pipeline after the
+                        MMU virtual
+  187 000000FC         ; address jump
+  188 000000FC E1A00000        NOP
+  189 00000100 E1A00000        NOP
+  190 00000104 E1A00000        NOP
+  191 00000108         
+  192 00000108         inVirtMem
+  193 00000108         ; The code is operating out of virtual memory now - regi
+                       ster R3
+  194 00000108         ; contains the virtual address for the top of stack spac
+                       e
+  195 00000108         
+  196 00000108         ; Initialize stacks for all modes
+  197 00000108         ; All interrupts disabled at core for all modes
+  198 00000108 E3A010C0        MOV              r1, #I_MASK:OR:F_MASK 
+
+
+
+ARM Macro Assembler    Page 6 
+
+
+                                                            ; No Interrupts
+  199 0000010C         
+  200 0000010C         ; Adjust stack top
+  201 0000010C E2433004        SUB              r3, r3, #4
+  202 00000110         
+  203 00000110         ; Enter FIQ mode and setup the FIQ stack pointer
+  204 00000110 E3810011        ORR              r0, r1, #MODE_FIQ
+  205 00000114 E12FF000        MSR              cpsr_cxsf, r0
+  206 00000118 E1A0D003        MOV              sp, r3
+  207 0000011C E2433C02        SUB              r3, r3, #FIQ_STACK_SIZE
+  208 00000120         
+  209 00000120         ; Enter IRQ mode and setup the IRQ stack pointer
+  210 00000120 E3810012        ORR              r0, r1, #MODE_IRQ
+  211 00000124 E12FF000        MSR              cpsr_cxsf, r0
+  212 00000128 E1A0D003        MOV              sp, r3
+  213 0000012C E2433B01        SUB              r3, r3, #IRQ_STACK_SIZE
+  214 00000130         
+  215 00000130         ; Enter Abort mode and setup the Abort stack pointer
+  216 00000130 E3810017        ORR              r0, r1, #MODE_ABORT
+  217 00000134 E12FF000        MSR              cpsr_cxsf, r0
+  218 00000138 E1A0D003        MOV              sp, r3
+  219 0000013C E2433C02        SUB              r3, r3, #ABORT_STACK_SIZE
+  220 00000140         
+  221 00000140         ; Enter Undefined mode and setup the Undefined stack poi
+                       nter
+  222 00000140 E381001B        ORR              r0, r1, #MODE_UNDEF
+  223 00000144 E12FF000        MSR              cpsr_cxsf, r0
+  224 00000148 E1A0D003        MOV              sp, r3
+  225 0000014C E2433C02        SUB              r3, r3, #UNDEF_STACK_SIZE
+  226 00000150         
+  227 00000150         ; Enter System mode and setup the User/System stack poin
+                       ter
+  228 00000150 E381001F        ORR              r0, r1, #MODE_SYSTEM
+  229 00000154 E12FF000        MSR              cpsr_cxsf, r0
+  230 00000158 E1A0D003        MOV              sp, r3
+  231 0000015C E2433C02        SUB              r3, r3, #SYSTEM_STACK_SIZE
+  232 00000160         
+  233 00000160         ; Enter SVC mode and setup the SVC stack pointer.
+  234 00000160         ; This is the mode for runtime initialization.
+  235 00000160 E3810013        ORR              r0, r1, #MODE_SVC
+  236 00000164 E12FF000        MSR              cpsr_cxsf, r0
+  237 00000168 E1A0D003        MOV              sp, r3
+  238 0000016C E2433A01        SUB              r3, r3, #SVC_STACK_SIZE
+  239 00000170         
+  240 00000170         ; Get address of application to execute
+  241 00000170 E59FF03C        LDR              pc, =c_entry
+  242 00000174 E1A00000        NOP
+  243 00000178         
+  244 00000178         dcache_flush
+  245 00000178 E3500000        CMP              r0, #0
+  246 0000017C 1A000002        BNE              inval
+  247 00000180         
+  248 00000180         flushonly
+  249 00000180 EE17FF7A        MRC              p15, 0, r15, c7, c10, 3
+  250 00000184 1AFFFFFD        BNE              flushonly
+  251 00000188 E1A0F00E        MOV              pc, lr
+  252 0000018C         
+  253 0000018C         inval
+  254 0000018C EE17FF7E        MRC              p15, 0, r15, c7, c14, 3
+
+
+
+ARM Macro Assembler    Page 7 
+
+
+  255 00000190 1AFFFFFD        BNE              inval
+  256 00000194 E1A0F00E        MOV              pc, lr
+  257 00000198         
+  258 00000198                 END
+              FFFFEFFA 
+              08040000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00001005 
+              00000000 
+Command Line: --debug --xref --device=DARMP3 --fpu=VFPv2 --apcs=interwork -o.\o
+utput\phy3250_startup_entry.o -IC:\Keil\ARM\INC\Philips --list=.\phy3250_startu
+p_entry.lst ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+STARTUP 00000000
+
+Symbol: STARTUP
+   Definitions
+      At line 68 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      None
+Comment: STARTUP unused
+arm926ejs_abort 00000010
+
+Symbol: arm926ejs_abort
+   Definitions
+      At line 81 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      None
+Comment: arm926ejs_abort unused
+arm926ejs_fiq 00000018
+
+Symbol: arm926ejs_fiq
+   Definitions
+      At line 85 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      None
+Comment: arm926ejs_fiq unused
+arm926ejs_irq 00000014
+
+Symbol: arm926ejs_irq
+   Definitions
+      At line 83 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      None
+Comment: arm926ejs_irq unused
+arm926ejs_prefetch 0000000C
+
+Symbol: arm926ejs_prefetch
+   Definitions
+      At line 79 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      None
+Comment: arm926ejs_prefetch unused
+arm926ejs_reset 00000000
+
+Symbol: arm926ejs_reset
+   Definitions
+      At line 73 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 25 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+Comment: arm926ejs_reset used once
+arm926ejs_reset_handler 0000005C
+
+Symbol: arm926ejs_reset_handler
+   Definitions
+      At line 114 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 74 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+Comment: arm926ejs_reset_handler used once
+arm926ejs_swi 00000008
+
+Symbol: arm926ejs_swi
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+Relocatable symbols
+
+   Definitions
+      At line 77 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      None
+Comment: arm926ejs_swi unused
+arm926ejs_undef 00000004
+
+Symbol: arm926ejs_undef
+   Definitions
+      At line 75 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      None
+Comment: arm926ejs_undef unused
+clearzi 000000B4
+
+Symbol: clearzi
+   Definitions
+      At line 152 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 158 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+Comment: clearzi used once
+clearzi_exit 000000CC
+
+Symbol: clearzi_exit
+   Definitions
+      At line 160 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 154 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+Comment: clearzi_exit used once
+dcache_flush 00000178
+
+Symbol: dcache_flush
+   Definitions
+      At line 244 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 26 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+Comment: dcache_flush used once
+flushonly 00000180
+
+Symbol: flushonly
+   Definitions
+      At line 248 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 250 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+Comment: flushonly used once
+inVirtMem 00000108
+
+Symbol: inVirtMem
+   Definitions
+      At line 192 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 175 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+Comment: inVirtMem used once
+inval 0000018C
+
+Symbol: inval
+   Definitions
+      At line 253 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+
+
+
+ARM Macro Assembler    Page 3 Alphabetic symbol ordering
+Relocatable symbols
+
+      At line 246 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+      At line 255 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+
+15 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.debug_info$$$STARTUP 00000000
+
+Symbol: .debug_info$$$STARTUP
+   Definitions
+      None
+   Uses
+      None
+Warning: .debug_info$$$STARTUP undefinedComment: .debug_info$$$STARTUP unused
+1 symbol
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.debug_line$$$STARTUP 00000000
+
+Symbol: .debug_line$$$STARTUP
+   Definitions
+      None
+   Uses
+      None
+Warning: .debug_line$$$STARTUP undefinedComment: .debug_line$$$STARTUP unused
+1 symbol
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.debug_abbrev 00000000
+
+Symbol: .debug_abbrev
+   Definitions
+      None
+   Uses
+      None
+Warning: .debug_abbrev undefinedComment: .debug_abbrev unused
+__ARM_asm.debug_abbrev 00000000
+
+Symbol: __ARM_asm.debug_abbrev
+   Definitions
+      None
+   Uses
+      None
+Warning: __ARM_asm.debug_abbrev undefinedComment: __ARM_asm.debug_abbrev unused
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+ABORT_STACK_SIZE 00000200
+
+Symbol: ABORT_STACK_SIZE
+   Definitions
+      At line 62 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 219 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+Comment: ABORT_STACK_SIZE used once
+END_OF_IRAM 08040000
+
+Symbol: END_OF_IRAM
+   Definitions
+      At line 53 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 139 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+Comment: END_OF_IRAM used once
+FIQ_STACK_SIZE 00000200
+
+Symbol: FIQ_STACK_SIZE
+   Definitions
+      At line 60 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 207 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+Comment: FIQ_STACK_SIZE used once
+F_MASK 00000040
+
+Symbol: F_MASK
+   Definitions
+      At line 50 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 116 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+      At line 198 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+
+IRQ_STACK_SIZE 00000400
+
+Symbol: IRQ_STACK_SIZE
+   Definitions
+      At line 61 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 213 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+Comment: IRQ_STACK_SIZE used once
+I_MASK 00000080
+
+Symbol: I_MASK
+   Definitions
+      At line 49 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 116 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+      At line 198 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+
+MMU_DISABLE_MASK FFFFEFFA
+
+Symbol: MMU_DISABLE_MASK
+   Definitions
+      At line 56 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 121 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+Comment: MMU_DISABLE_MASK used once
+MMU_ENABLE_MASK 00001005
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+Absolute symbols
+
+
+Symbol: MMU_ENABLE_MASK
+   Definitions
+      At line 57 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 179 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+Comment: MMU_ENABLE_MASK used once
+MODE_ABORT 00000017
+
+Symbol: MODE_ABORT
+   Definitions
+      At line 45 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 216 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+Comment: MODE_ABORT used once
+MODE_BITS 0000001F
+
+Symbol: MODE_BITS
+   Definitions
+      At line 48 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      None
+Comment: MODE_BITS unused
+MODE_FIQ 00000011
+
+Symbol: MODE_FIQ
+   Definitions
+      At line 42 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 204 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+Comment: MODE_FIQ used once
+MODE_IRQ 00000012
+
+Symbol: MODE_IRQ
+   Definitions
+      At line 43 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 210 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+Comment: MODE_IRQ used once
+MODE_SVC 00000013
+
+Symbol: MODE_SVC
+   Definitions
+      At line 44 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 116 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+      At line 235 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+
+MODE_SYSTEM 0000001F
+
+Symbol: MODE_SYSTEM
+   Definitions
+      At line 47 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 228 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+Comment: MODE_SYSTEM used once
+MODE_UNDEF 0000001B
+
+Symbol: MODE_UNDEF
+
+
+
+ARM Macro Assembler    Page 3 Alphabetic symbol ordering
+Absolute symbols
+
+   Definitions
+      At line 46 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 222 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+Comment: MODE_UNDEF used once
+MODE_USR 00000010
+
+Symbol: MODE_USR
+   Definitions
+      At line 41 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      None
+Comment: MODE_USR unused
+SVC_STACK_SIZE 00001000
+
+Symbol: SVC_STACK_SIZE
+   Definitions
+      At line 65 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 238 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+Comment: SVC_STACK_SIZE used once
+SYSTEM_STACK_SIZE 00000200
+
+Symbol: SYSTEM_STACK_SIZE
+   Definitions
+      At line 64 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 231 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+Comment: SYSTEM_STACK_SIZE used once
+UNDEF_STACK_SIZE 00000200
+
+Symbol: UNDEF_STACK_SIZE
+   Definitions
+      At line 63 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 225 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+Comment: UNDEF_STACK_SIZE used once
+19 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+Image$$ER_ZI$$ZI$$Base 00000000
+
+Symbol: Image$$ER_ZI$$ZI$$Base
+   Definitions
+      At line 30 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 149 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+Comment: Image$$ER_ZI$$ZI$$Base used once
+Image$$ER_ZI$$ZI$$Length 00000000
+
+Symbol: Image$$ER_ZI$$ZI$$Length
+   Definitions
+      At line 31 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 150 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+Comment: Image$$ER_ZI$$ZI$$Length used once
+c_entry 00000000
+
+Symbol: c_entry
+   Definitions
+      At line 35 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 241 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+Comment: c_entry used once
+mmu_base_aadr 00000000
+
+Symbol: mmu_base_aadr
+   Definitions
+      At line 29 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 141 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+      At line 170 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+
+phy3250_init 00000000
+
+Symbol: phy3250_init
+   Definitions
+      At line 28 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+   Uses
+      At line 162 in file ..\COMMON\YL3250\startup\phy3250_startup_entry.s
+Comment: phy3250_init used once
+5 symbols
+365 symbols in table

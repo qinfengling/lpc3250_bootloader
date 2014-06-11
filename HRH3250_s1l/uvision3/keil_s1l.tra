@@ -1,0 +1,87 @@
+*** Creating Trace Output File 'keil_s1l.tra' Ok.
+### Preparing for ADS-LD.
+### Creating ADS-LD Command Line
+### List of Objects: adding '"lpc_api.o"'
+### List of Objects: adding '"lpc_arm922t_cp15_driver.o"'
+### List of Objects: adding '"lpc_bmp.o"'
+### List of Objects: adding '"lpc_colors.o"'
+### List of Objects: adding '"lpc_fat16.o"'
+### List of Objects: adding '"lpc_fat16_private.o"'
+### List of Objects: adding '"lpc_fonts.o"'
+### List of Objects: adding '"lpc_heap.o"'
+### List of Objects: adding '"lpc_helvr10.o"'
+### List of Objects: adding '"lpc_lbecc.o"'
+### List of Objects: adding '"lpc_lcd_params.o"'
+### List of Objects: adding '"lpc_line_parser.o"'
+### List of Objects: adding '"lpc_nandflash_params.o"'
+### List of Objects: adding '"lpc_rom8x8.o"'
+### List of Objects: adding '"lpc_rom8x16.o"'
+### List of Objects: adding '"lpc_string.o"'
+### List of Objects: adding '"lpc_swim.o"'
+### List of Objects: adding '"lpc_swim_font.o"'
+### List of Objects: adding '"lpc_swim_image.o"'
+### List of Objects: adding '"lpc_winfreesystem14x16.o"'
+### List of Objects: adding '"lpc_x5x7.o"'
+### List of Objects: adding '"lpc_x6x13.o"'
+### List of Objects: adding '"lpc3xxx_spwm_driver.o"'
+### List of Objects: adding '"lpc32xx_adc_driver.o"'
+### List of Objects: adding '"lpc32xx_clcdc_driver.o"'
+### List of Objects: adding '"lpc32xx_clkpwr_driver.o"'
+### List of Objects: adding '"lpc32xx_dma_driver.o"'
+### List of Objects: adding '"lpc32xx_gpio_driver.o"'
+### List of Objects: adding '"lpc32xx_hstimer_driver.o"'
+### List of Objects: adding '"lpc32xx_hsuart_driver.o"'
+### List of Objects: adding '"lpc32xx_i2c_driver.o"'
+### List of Objects: adding '"lpc32xx_i2s_driver.o"'
+### List of Objects: adding '"lpc32xx_intc_driver.o"'
+### List of Objects: adding '"lpc32xx_kscan_driver.o"'
+### List of Objects: adding '"lpc32xx_mlcnand_driver.o"'
+### List of Objects: adding '"lpc32xx_mstimer_driver.o"'
+### List of Objects: adding '"lpc32xx_pwm_driver.o"'
+### List of Objects: adding '"lpc32xx_rtc_driver.o"'
+### List of Objects: adding '"lpc32xx_sdcard_driver.o"'
+### List of Objects: adding '"lpc32xx_slcnand_driver.o"'
+### List of Objects: adding '"lpc32xx_spi_driver.o"'
+### List of Objects: adding '"lpc32xx_ssp_driver.o"'
+### List of Objects: adding '"lpc32xx_timer_driver.o"'
+### List of Objects: adding '"lpc32xx_tsc_driver.o"'
+### List of Objects: adding '"lpc32xx_uart_driver.o"'
+### List of Objects: adding '"lpc32xx_wdt_driver.o"'
+### List of Objects: adding '"phy3250_board.o"'
+### List of Objects: adding '"phy3250_nand.o"'
+### List of Objects: adding '"s1l_bootmgr.o"'
+### List of Objects: adding '"s1l_cmds.o"'
+### List of Objects: adding '"s1l_cmds_core.o"'
+### List of Objects: adding '"s1l_cmds_flash.o"'
+### List of Objects: adding '"s1l_cmds_image.o"'
+### List of Objects: adding '"s1l_fat.o"'
+### List of Objects: adding '"s1l_image_mngt.o"'
+### List of Objects: adding '"s1l_line_input.o"'
+### List of Objects: adding '"s1l_memtests.o"'
+### List of Objects: adding '"s1l_sys.o"'
+### List of Objects: adding '"sys_hw.o"'
+### List of Objects: adding '"sys_hw_cmd_group.o"'
+### List of Objects: adding '"sys_mmu_cmd_group.o"'
+### List of Objects: adding '"sysapi_blkdev.o"'
+### List of Objects: adding '"sysapi_eeprom.o"'
+### List of Objects: adding '"sysapi_flash.o"'
+### List of Objects: adding '"sysapi_misc.o"'
+### List of Objects: adding '"sysapi_termio.o"'
+### List of Objects: adding '"sysapi_timer.o"'
+### List of Objects: adding '"phy3250_startup.o"'
+### List of Objects: adding '".\phy3250_startup_entry.o"'
+### ADS-LD Command completed:
+"lpc_api.o" "lpc_arm922t_cp15_driver.o" "lpc_bmp.o" "lpc_colors.o" "lpc_fat16.o" "lpc_fat16_private.o" "lpc_fonts.o" "lpc_heap.o" "lpc_helvr10.o" "lpc_lbecc.o" "lpc_lcd_params.o" "lpc_line_parser.o" "lpc_nandflash_params.o" "lpc_rom8x8.o" "lpc_rom8x16.o" "lpc_string.o" "lpc_swim.o" "lpc_swim_font.o" "lpc_swim_image.o" "lpc_winfreesystem14x16.o" "lpc_x5x7.o" "lpc_x6x13.o" "lpc3xxx_spwm_driver.o" "lpc32xx_adc_driver.o" "lpc32xx_clcdc_driver.o" "lpc32xx_clkpwr_driver.o" "lpc32xx_dma_driver.o" "lpc32xx_gpio_driver.o" "lpc32xx_hstimer_driver.o" "lpc32xx_hsuart_driver.o" "lpc32xx_i2c_driver.o" "lpc32xx_i2s_driver.o" "lpc32xx_intc_driver.o" "lpc32xx_kscan_driver.o" "lpc32xx_mlcnand_driver.o" "lpc32xx_mstimer_driver.o" "lpc32xx_pwm_driver.o" "lpc32xx_rtc_driver.o" "lpc32xx_sdcard_driver.o" "lpc32xx_slcnand_driver.o" "lpc32xx_spi_driver.o" "lpc32xx_ssp_driver.o" "lpc32xx_timer_driver.o" "lpc32xx_tsc_driver.o" "lpc32xx_uart_driver.o" "lpc32xx_wdt_driver.o" "phy3250_board.o" "phy3250_nand.o" "s1l_bootmgr.o" "s1l_cmds.o" "s1l_cmds_core.o" "s1l_cmds_flash.o" "s1l_cmds_image.o" "s1l_fat.o" "s1l_image_mngt.o" "s1l_line_input.o" "s1l_memtests.o" "s1l_sys.o" "sys_hw.o" "sys_hw_cmd_group.o" "sys_mmu_cmd_group.o" "sysapi_blkdev.o" "sysapi_eeprom.o" "sysapi_flash.o" "sysapi_misc.o" "sysapi_termio.o" "sysapi_timer.o" "phy3250_startup.o" ".\phy3250_startup_entry.o" --device DARMP3 --fpu=vfpv2 --strict --scatter "..\..\common\uvision3\keil_simple.sct" 
+--autoat --summary_stderr --info summarysizes --map --xref --callgraph --symbols 
+--info sizes --info totals --info unused --info veneers 
+ --list ".\keil_s1l.map" -o "keil_s1l.axf"### Preparing Environment (PrepEnvAds)
+### ADS-LD Output File: 'keil_s1l.axf'
+### ADS-LD Command File: 'keil_s1l.lnp'
+### Checking for dirty Components...
+### Creating CmdFile 'keil_s1l.lnp', Handle=0x000002A4
+### Writing '.lnp' file
+### ADS-LD Command file 'keil_s1l.lnp' is ready.
+### ADS-LD: About to start ADS-LD Thread.
+### ADS-LD: executed with 11 errors
+### Updating obj list
+### LDADS_file() completed.
